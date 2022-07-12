@@ -48,7 +48,7 @@ const Home = () => {
       <div className={styles.para} style={{ background: '#343A40', color: '#F8F9FA' }}>
         <h2 className={styles.header}>CONTACT ME</h2>
         <p>
-          If you need anything, I'll always be one
+          If you need anything, I&apos;ll always be one
           <Link href='mailto:KulkarniVenugopal@outlook.com'>email</Link> away.
         </p>
       </div>
