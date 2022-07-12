@@ -41,14 +41,14 @@ const Home = () => {
         </p>
         <p>
           This website was built with <a href='https://nextjs.org/'>Next.js</a> and
-          the navigation was inspired by the folks over at{' '}
+          the navigation was inspired by the folks over at
           <Link href='https://www.hugeinc.com/'>Huge</Link>.
         </p>
       </div>
       <div className={styles.para} style={{ background: '#343A40', color: '#F8F9FA' }}>
         <h2 className={styles.header}>CONTACT ME</h2>
         <p>
-          If you need anything, I'll always be one{' '}
+          If you need anything, I'll always be one
           <Link href='mailto:KulkarniVenugopal@outlook.com'>email</Link> away.
         </p>
       </div>
