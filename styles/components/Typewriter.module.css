@@ -1,0 +1,26 @@
+.title {
+    font-size: 4.5rem;
+    font-weight: lighter;
+    cursor: default;
+    user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    animation: fadein 1s;
+}
+
+.cursor {
+    border-left: 0.02em solid #000000;
+    animation: blink 0.7s steps(1) infinite;
+}
+
+@keyframes blink {
+    50% {
+        border-color: transparent;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .title {
+        font-size: 3rem;
+    }
+}
