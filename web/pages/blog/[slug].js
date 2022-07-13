@@ -1,14 +1,24 @@
+import styles from '../../styles/Post.module.css';
+
 import groq from 'groq';
 import imageUrlBuilder from '@sanity/image-url';
-import { PortableText } from '@portabletext/react';
 import client from '../../client';
 
+//MDX Support
 import { MDXRemote } from 'next-mdx-remote';
 import { serialize } from 'next-mdx-remote/serialize';
 
-//importable components
+//importable components for MDX
 import Typewriter from '../../components/Typewriter';
 const components = { Typewriter };
+
+import Image from 'next/image';
+import Link from 'next/link';
+
+//icons
+import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
+// import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function urlFor(source) {
     return imageUrlBuilder(client).image(source);
@@ -21,14 +31,10 @@ const ptComponents = {
                 return null;
             }
             return (
-                <img
+                <Image
                     alt={value.alt || ' '}
                     loading='lazy'
-                    src={urlFor(value)
-                        .width(320)
-                        .height(240)
-                        .fit('max')
-                        .auto('format')}
+                    src={urlFor(value).fit('max').auto('format')}
                 />
             );
         },
@@ -44,32 +50,52 @@ const Post = ({ post }) => {
         title = 'Missing title',
         name = 'Missing name',
         categories,
+        date,
         authorImage,
         body = [],
     } = post;
 
     return (
-        <article>
-            <h1>{title}</h1>
-            <span>By {name}</span>
-            {categories && (
-                <ul>
-                    Posted in
-                    {categories.map((category) => (
-                        <li key={category}>{category}</li>
-                    ))}
-                </ul>
-            )}
-            {authorImage && (
+        <div>
+            <div
+                className={`${styles['blog-header']} ${styles['blog-sticky']}`}
+            >
+                <h1 className={styles['blog-title']}>BLOG</h1>
+            </div>
+
+            <div className={styles['blog-header']}></div>
+
+            <Link href='/blog'>
+                <span className={styles.return}>
+                    <FontAwesomeIcon icon={faAngleLeft} />
+                    {' Back to all'}
+                </span>
+            </Link>
+
+            <article className={styles.container}>
+                <h1 className={styles.title}>{title}</h1>
+                <span>By {name}</span>
+                {categories && (
+                    <ul>
+                        Posted in
+                        {categories.map((category) => (
+                            <li key={category}>{category}</li>
+                        ))}
+                    </ul>
+                )}
+                {/* {authorImage && (
                 <div>
                     <img
-                        src={urlFor(authorImage).width(50).url()}
+                        src={urlFor(authorImage).url()}
                         alt={`${name}'s picture`}
                     />
                 </div>
-            )}
-            <MDXRemote {...body} components={components} />
-        </article>
+            )} */}
+                <div className={styles.body}>
+                    <MDXRemote {...body} components={components} />
+                </div>
+            </article>
+        </div>
     );
 };
 
@@ -77,6 +103,7 @@ const query = groq`*[_type == "post" && slug.current == $slug][0]{
   title,
   "name": author->name,
   "categories": categories[]->title,
+  "date": publishedAt,
   "authorImage": author->image,
   body
 }`;
