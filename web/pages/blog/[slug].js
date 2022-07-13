@@ -27,15 +27,9 @@ const ptComponents = {
 };
 
 const Post = ({ post }) => {
-    const {
-        title = 'Missing Title',
-        name = 'Missing Name',
-        categories,
-        body = [],
-    } = post;
+    const { name = 'Missing Name', categories, body = [] } = post;
     return (
         <article>
-            <h1>{title}</h1>
             <span>By {name}</span>
             {categories && (
                 <ul>
