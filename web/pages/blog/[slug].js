@@ -3,6 +3,8 @@ import client from '../../client';
 import groq from 'groq';
 import { PortableText } from '@portabletext/react';
 
+import Image from 'next/image';
+
 const ptComponents = {
     types: {
         image: ({ value }) => {
@@ -10,7 +12,7 @@ const ptComponents = {
                 return null;
             }
             return (
-                <img
+                <Image
                     alt={value.alt || ' '}
                     loading='lazy'
                     src={urlFor(value)
@@ -50,7 +52,6 @@ const Post = ({ post }) => {
 
 // groq query to get the post by slug and then get its details
 const query = groq`*[_type == "post" && slug.current == $slug][0]{
-    title,
     "name": author->name,
     "categories": categories[]->title,
     body
