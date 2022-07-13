@@ -1,9 +1,11 @@
-//Sanity imports
-import client from '../../client';
 import groq from 'groq';
+import imageUrlBuilder from '@sanity/image-url';
 import { PortableText } from '@portabletext/react';
+import client from '../../client';
 
-import Image from 'next/image';
+function urlFor(source) {
+    return imageUrlBuilder(client).image(source);
+}
 
 const ptComponents = {
     types: {
@@ -12,7 +14,7 @@ const ptComponents = {
                 return null;
             }
             return (
-                <Image
+                <img
                     alt={value.alt || ' '}
                     loading='lazy'
                     src={urlFor(value)
@@ -27,9 +29,20 @@ const ptComponents = {
 };
 
 const Post = ({ post }) => {
-    const { name = 'Missing Name', categories, body = [] } = post;
+    if (!post) {
+        return null;
+    }
+    const {
+        title = 'Missing title',
+        name = 'Missing name',
+        categories,
+        authorImage,
+        body = [],
+    } = post;
+
     return (
         <article>
+            <h1>{title}</h1>
             <span>By {name}</span>
             {categories && (
                 <ul>
@@ -39,21 +52,29 @@ const Post = ({ post }) => {
                     ))}
                 </ul>
             )}
+            {authorImage && (
+                <div>
+                    <img
+                        src={urlFor(authorImage).width(50).url()}
+                        alt={`${name}'s picture`}
+                    />
+                </div>
+            )}
             <PortableText value={body} components={ptComponents} />
         </article>
     );
 };
 
-// groq query to get the post by slug and then get its details
 const query = groq`*[_type == "post" && slug.current == $slug][0]{
-    "name": author->name,
-    "categories": categories[]->title,
-    body
-  }`;
-
+  title,
+  "name": author->name,
+  "categories": categories[]->title,
+  "authorImage": author->image,
+  body
+}`;
 export async function getStaticPaths() {
     const paths = await client.fetch(
-        `*[_type == 'post' && defined(slug.current)][].slug.current`
+        groq`*[_type == "post" && defined(slug.current)][].slug.current`
     );
 
     return {
@@ -65,13 +86,12 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
     // It's important to default the slug so that it doesn't return "undefined"
     const { slug = '' } = context.params;
-
     const post = await client.fetch(query, { slug });
+
     return {
         props: {
             post,
         },
     };
 }
-
 export default Post;
