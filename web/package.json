@@ -12,6 +12,7 @@
     "@sanity/image-url": "^1.0.1",
     "groq": "^2.29.3",
     "next": "12.1.4",
+    "next-mdx-remote": "^4.0.3",
     "react": "18.0.0",
     "react-dom": "18.0.0"
   },

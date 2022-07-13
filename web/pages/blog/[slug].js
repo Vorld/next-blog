@@ -3,6 +3,13 @@ import imageUrlBuilder from '@sanity/image-url';
 import { PortableText } from '@portabletext/react';
 import client from '../../client';
 
+import { MDXRemote } from 'next-mdx-remote';
+import { serialize } from 'next-mdx-remote/serialize';
+
+//importable components
+import Typewriter from '../../components/Typewriter';
+const components = { Typewriter };
+
 function urlFor(source) {
     return imageUrlBuilder(client).image(source);
 }
@@ -32,6 +39,7 @@ const Post = ({ post }) => {
     if (!post) {
         return null;
     }
+
     const {
         title = 'Missing title',
         name = 'Missing name',
@@ -60,7 +68,7 @@ const Post = ({ post }) => {
                     />
                 </div>
             )}
-            <PortableText value={body} components={ptComponents} />
+            <MDXRemote {...body} components={components} />
         </article>
     );
 };
@@ -86,7 +94,14 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
     // It's important to default the slug so that it doesn't return "undefined"
     const { slug = '' } = context.params;
-    const post = await client.fetch(query, { slug });
+    let post = await client.fetch(query, { slug });
+
+    const body = await serialize(post.body);
+
+    post = {
+        ...post,
+        body: body,
+    };
 
     return {
         props: {
