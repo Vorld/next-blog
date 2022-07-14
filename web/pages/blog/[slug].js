@@ -11,7 +11,8 @@ import { serialize } from 'next-mdx-remote/serialize';
 //importable components for MDX
 import Typewriter from '../../components/Typewriter';
 import Moment from 'react-moment';
-const components = { Typewriter, Moment };
+import Latex from 'react-latex';
+const components = { Typewriter, Moment, Latex };
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -174,6 +175,5 @@ export async function getStaticProps(context) {
 export default Post;
 
 //TODO: LaTeX Support
-//TODO: Navigation between slugs
 //TODO: Tagging/Categorization system
 //TODO: All article display on Blog Index
