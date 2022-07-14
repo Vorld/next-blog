@@ -63,27 +63,20 @@ const Post = ({ post, open }) => {
     return (
         <div>
             <Header navOpen={open} heading={'BLOG'} />
-            <Link href='/blog'>
-                <a className={styles.return}>
-                    <FontAwesomeIcon icon={faAngleLeft} />
-                    {' Back to all'}
-                </a>
-            </Link>
 
             <article className={styles.container}>
+                <Link href='/blog'>
+                    <a className={styles.return}>
+                        <FontAwesomeIcon icon={faAngleLeft} />
+                        {' Back to all'}
+                    </a>
+                </Link>
                 <h1 className={styles.title}>{title}</h1>
                 <h5 className={styles.name}>By {name}</h5>
                 <span className={styles.date}>
                     <Moment format='Do MMMM YYYY, ha'>{date}</Moment>
                 </span>
-                {categories && (
-                    <ul>
-                        Posted in
-                        {categories.map((category) => (
-                            <li key={category}>{category}</li>
-                        ))}
-                    </ul>
-                )}
+
                 {/* {authorImage && (
                 <div>
                     <img
@@ -95,6 +88,12 @@ const Post = ({ post, open }) => {
                 <div className={styles.body}>
                     <MDXRemote {...body} components={components} />
                 </div>
+
+                <span className={styles.categories}>
+                    {categories.map((category) => (
+                        <Link href={`/blog/${category}`}>{category}</Link>
+                    ))}
+                </span>
             </article>
 
             <div className={styles['nav-buttons']}>
