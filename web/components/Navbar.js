@@ -26,7 +26,6 @@ const Navbar = (props) => {
 
     //context
     const handleClick = () => {
-
         if (open === 'close') {
             setOpen('open');
         } else {
@@ -44,7 +43,7 @@ const Navbar = (props) => {
         setVisible(
             (prevScrollPos > currentScrollPos &&
                 prevScrollPos - currentScrollPos > 30) ||
-            currentScrollPos < 10
+                currentScrollPos < 10
         );
 
         setPrevScrollPos(currentScrollPos);
@@ -59,7 +58,7 @@ const Navbar = (props) => {
 
     return (
         <div>
-            <nav className={`${styles[open]} ${styles["main-nav"]}`}>
+            <nav className={`${styles[open]} ${styles['main-nav']}`}>
                 <ul>
                     <li>
                         <Link href='/'>
@@ -85,12 +84,22 @@ const Navbar = (props) => {
             </nav>
             <button
                 onClick={() => handleClick()}
-                className={`${styles["menu-button"]}  ${!visible && open === 'close' ? styles["menu-button-hide"] : null
-                    }`}
+                className={`${styles['menu-button']}  ${
+                    !visible && open === 'close'
+                        ? styles['menu-button-hide']
+                        : null
+                }`}
             ></button>
             <div className={styles.framebox}></div>
-            <div className={`${styles.shifter} ${open === 'open' ? styles.low : null}`}>{props.children}</div>
-
+            <div
+                className={`${styles.shifter} ${
+                    open === 'open' ? styles.low : null
+                }`}
+            >
+                {React.cloneElement(props.children, {
+                    open: open,
+                })}
+            </div>
         </div>
     );
 };

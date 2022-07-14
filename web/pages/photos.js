@@ -1,7 +1,7 @@
 import Header from '../components/Header';
 
-const Photos = () => {
-    return <Header heading={'PHOTOS'} />;
+const Photos = ({ open }) => {
+    return <Header navOpen={open} heading={'PHOTOS'} />;
 };
 
 export default Photos;

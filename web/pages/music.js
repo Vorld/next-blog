@@ -1,7 +1,7 @@
 import Header from '../components/Header';
 
-const Music = () => {
-    return <Header heading={'MUSIC'} />;
+const Music = ({ open }) => {
+    return <Header navOpen={open} heading={'MUSIC'} />;
 };
 
 export default Music;

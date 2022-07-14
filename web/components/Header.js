@@ -3,17 +3,19 @@ import styles from '../styles/components/Header.module.css';
 
 import React from 'react';
 
-const Header = ({ heading }) => {
+const Header = ({ heading, navOpen }) => {
     return (
         <div>
             <div
-                className={`${styles['blog-header']} ${styles['blog-sticky']}`}
+                className={`${styles['header']} ${styles['sticky']} ${
+                    navOpen === 'open' ? styles.low : null
+                }`}
             >
-                <h1 className={styles['blog-title']}>{heading}</h1>
+                <h1 className={styles['title']}>{heading}</h1>
             </div>
 
-            <div className={styles['blog-header']}>
-                <h1 className={styles['blog-title']}>{heading}</h1>
+            <div className={styles['header']}>
+                {/* <h1 className={styles['placeholder-title']}>{heading}</h1> */}
             </div>
         </div>
     );

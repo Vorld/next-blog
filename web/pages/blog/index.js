@@ -3,10 +3,10 @@ import groq from 'groq';
 import client from '../../client';
 import Header from '../../components/Header';
 
-const Blog = ({ posts }) => {
+const Blog = ({ posts, open }) => {
     return (
         <div>
-            <Header heading={'BLOG'} />
+            <Header navOpen={open} heading={'BLOG'} />
             {posts.length > 0 &&
                 posts.map(
                     ({ _id, title = '', slug = '', publishedAt = '' }) =>

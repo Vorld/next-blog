@@ -44,7 +44,7 @@ const ptComponents = {
     },
 };
 
-const Post = ({ post }) => {
+const Post = ({ post, open }) => {
     if (!post) {
         return null;
     }
@@ -62,7 +62,7 @@ const Post = ({ post }) => {
 
     return (
         <div>
-            <Header heading={'BLOG'} />
+            <Header navOpen={open} heading={'BLOG'} />
             <Link href='/blog'>
                 <a className={styles.return}>
                     <FontAwesomeIcon icon={faAngleLeft} />
@@ -168,3 +168,4 @@ export default Post;
 
 //TODO: Tagging/Categorization system
 //TODO: All article display on Blog Index
+// Refactor all haeder variable names
