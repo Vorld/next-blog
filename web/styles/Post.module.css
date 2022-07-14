@@ -1,24 +1,3 @@
-.blog-sticky {
-    position: fixed;
-    font-size: 2rem;
-    z-index: 5;
-    top: 0;
-    margin: 0;
-}
-
-.blog-title {
-    font-size: 2.5rem;
-    padding-left: 75px;
-
-    font-weight: lighter;
-}
-
-.blog-header {
-    width: 100%;
-    height: 100px;
-    background-color: #f8f9fa;
-}
-
 .title {
     text-transform: uppercase;
     font-weight: 600;

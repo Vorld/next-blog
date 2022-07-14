@@ -16,6 +16,7 @@ const components = { Typewriter, Moment, Latex };
 
 import Image from 'next/image';
 import Link from 'next/link';
+import Header from '../../components/Header';
 
 //icons
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
@@ -61,14 +62,7 @@ const Post = ({ post }) => {
 
     return (
         <div>
-            <div
-                className={`${styles['blog-header']} ${styles['blog-sticky']}`}
-            >
-                <h1 className={styles['blog-title']}>BLOG</h1>
-            </div>
-
-            <div className={styles['blog-header']}></div>
-
+            <Header heading={'BLOG'} />
             <Link href='/blog'>
                 <a className={styles.return}>
                     <FontAwesomeIcon icon={faAngleLeft} />
@@ -128,7 +122,7 @@ const Post = ({ post }) => {
     );
 };
 
-const currentQuery = groq`*[_type == "post" && slug.current == $slug][0]{
+const query = groq`*[_type == "post" && slug.current == $slug][0]{
   title,
   "name": author->name,
   "categories": categories[]->title,
@@ -138,8 +132,6 @@ const currentQuery = groq`*[_type == "post" && slug.current == $slug][0]{
   'previousPost': *[_type == 'post' && publishedAt < ^.publishedAt] | order(publishedAt desc)[0].slug.current,
   'nextPost': *[_type == 'post' && publishedAt > ^.publishedAt] | order(publishedAt asc)[0].slug.current
 }`;
-
-// const PreviousQuery = groq``
 
 export async function getStaticPaths() {
     const paths = await client.fetch(
@@ -155,7 +147,7 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
     // It's important to default the slug so that it doesn't return "undefined"
     const { slug = '' } = context.params;
-    let post = await client.fetch(currentQuery, { slug });
+    let post = await client.fetch(query, { slug });
 
     const body = await serialize(post.body);
 
@@ -174,6 +166,5 @@ export async function getStaticProps(context) {
 }
 export default Post;
 
-//TODO: LaTeX Support
 //TODO: Tagging/Categorization system
 //TODO: All article display on Blog Index

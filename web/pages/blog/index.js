@@ -1,11 +1,12 @@
 import Link from 'next/link';
 import groq from 'groq';
 import client from '../../client';
+import Header from '../../components/Header';
 
 const Blog = ({ posts }) => {
     return (
         <div>
-            <h1>Blog</h1>
+            <Header heading={'BLOG'} />
             {posts.length > 0 &&
                 posts.map(
                     ({ _id, title = '', slug = '', publishedAt = '' }) =>

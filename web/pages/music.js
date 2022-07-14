@@ -1,5 +1,7 @@
+import Header from '../components/Header';
+
 const Music = () => {
-    return <div>MUSIC</div>
-}
+    return <Header heading={'MUSIC'} />;
+};
 
 export default Music;

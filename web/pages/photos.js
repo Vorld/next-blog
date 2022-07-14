@@ -1,5 +1,7 @@
+import Header from '../components/Header';
+
 const Photos = () => {
-    return <div>PHOTOS</div>
-}
+    return <Header heading={'PHOTOS'} />;
+};
 
 export default Photos;
