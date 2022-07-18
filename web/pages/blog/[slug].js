@@ -95,8 +95,11 @@ const Post = ({ post, open }) => {
 
                 <span className={styles.categories}>
                     {categories.map((category) => (
-                        <Link key={category} href={`/blog/${category}`}>
-                            {category}
+                        <Link
+                            key={category.title}
+                            href={`/blog/category/${category.slug.current}`}
+                        >
+                            {category.title}
                         </Link>
                     ))}
                 </span>
@@ -130,7 +133,7 @@ const Post = ({ post, open }) => {
 const query = groq`*[_type == "post" && slug.current == $slug][0]{
   title,
   "name": author->name,
-  "categories": categories[]->title,
+  "categories": categories[]->{title, slug},
   "date": publishedAt,
   "authorImage": author->image,
   body,
@@ -161,14 +164,13 @@ export async function getStaticProps(context) {
         body: body,
     };
 
-    console.log(post);
-
     return {
         props: {
             post,
         },
     };
 }
+
 export default Post;
 
 //TODO: Tagging/Categorization system
