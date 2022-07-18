@@ -14,14 +14,18 @@ import Moment from 'react-moment';
 import Latex from 'react-latex';
 const components = { Typewriter, Moment, Latex };
 
+// next import
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+
 import Header from '../../components/Header';
 
 //icons
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useEffect } from 'react';
 
 function urlFor(source) {
     return imageUrlBuilder(client).image(source);
@@ -91,7 +95,9 @@ const Post = ({ post, open }) => {
 
                 <span className={styles.categories}>
                     {categories.map((category) => (
-                        <Link href={`/blog/${category}`}>{category}</Link>
+                        <Link key={category} href={`/blog/${category}`}>
+                            {category}
+                        </Link>
                     ))}
                 </span>
             </article>
@@ -139,7 +145,7 @@ export async function getStaticPaths() {
 
     return {
         paths: paths.map((slug) => ({ params: { slug } })),
-        fallback: true,
+        fallback: false,
     };
 }
 
