@@ -1,7 +1,6 @@
 import styles from '../../styles/Post.module.css';
 
 import groq from 'groq';
-import imageUrlBuilder from '@sanity/image-url';
 import client from '../../client';
 
 //MDX Support
@@ -15,9 +14,7 @@ import Latex from 'react-latex';
 const components = { Typewriter, Moment, Latex };
 
 // next import
-import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 
 import Header from '../../components/Header';
 
@@ -25,28 +22,6 @@ import Header from '../../components/Header';
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useEffect } from 'react';
-
-function urlFor(source) {
-    return imageUrlBuilder(client).image(source);
-}
-
-const ptComponents = {
-    types: {
-        image: ({ value }) => {
-            if (!value?.asset?._ref) {
-                return null;
-            }
-            return (
-                <Image
-                    alt={value.alt || ' '}
-                    loading='lazy'
-                    src={urlFor(value).fit('max').auto('format')}
-                />
-            );
-        },
-    },
-};
 
 const Post = ({ post, open }) => {
     if (!post) {
@@ -58,7 +33,6 @@ const Post = ({ post, open }) => {
         name = 'Missing name',
         categories,
         date,
-        authorImage,
         body = [],
         previousPost,
         nextPost,
@@ -81,14 +55,6 @@ const Post = ({ post, open }) => {
                     <Moment format='Do MMMM YYYY, ha'>{date}</Moment>
                 </span>
 
-                {/* {authorImage && (
-                <div>
-                    <img
-                        src={urlFor(authorImage).url()}
-                        alt={`${name}'s picture`}
-                    />
-                </div>
-            )} */}
                 <div className={styles.body}>
                     <MDXRemote {...body} components={components} />
                 </div>
@@ -135,7 +101,6 @@ const query = groq`*[_type == "post" && slug.current == $slug][0]{
   "name": author->name,
   "categories": categories[]->{title, slug},
   "date": publishedAt,
-  "authorImage": author->image,
   body,
   'previousPost': *[_type == 'post' && publishedAt < ^.publishedAt] | order(publishedAt desc)[0].slug.current,
   'nextPost': *[_type == 'post' && publishedAt > ^.publishedAt] | order(publishedAt asc)[0].slug.current
@@ -173,6 +138,5 @@ export async function getStaticProps(context) {
 
 export default Post;
 
-//TODO: Tagging/Categorization system
 //TODO: All article display on Blog Index
 // Refactor all haeder variable names

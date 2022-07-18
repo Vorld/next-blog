@@ -1,10 +1,17 @@
 // React component to dynamically load blog posts for a given category
-import { faCommentsDollar } from '@fortawesome/free-solid-svg-icons';
 import groq from 'groq';
 import client from '../../../client';
 
-const BlogCategory = ({ categoryInfo }) => {
-    // return <div>{categoryInfo.title}</div>;
+import Link from 'next/link';
+
+const BlogCategory = ({ posts }) => {
+    return (
+        <div>
+            {posts.map((post) => (
+                <Link href={`/blog/${post.slug.current}`}>{post.title}</Link>
+            ))}
+        </div>
+    );
 };
 
 export async function getStaticPaths() {
@@ -23,8 +30,12 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
     // Fetch the blog posts of a given category
     const { category = '' } = context.params;
-    const categoryInfo = await client.fetch(
-        `*[_type == "post" && $category in categories[]->slug.current][]{title, description}`,
+    const posts = await client.fetch(
+        `*[_type == "post" && $category in categories[]->slug.current][]{
+            title, 
+            slug,
+            body,
+        }`,
         {
             category,
         }
@@ -32,7 +43,7 @@ export async function getStaticProps(context) {
 
     return {
         props: {
-            categoryInfo,
+            posts,
         },
     };
 }
