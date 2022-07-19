@@ -133,9 +133,8 @@ export async function getStaticProps(context) {
         props: {
             post,
         },
+        revalidate: 10,
     };
 }
 
 export default Post;
-
-// Refactor all haeder variable names
