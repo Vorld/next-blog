@@ -23,7 +23,7 @@ const Blog = ({ posts, open }) => {
                         publishedAt,
                     }) => (
                         <div key={_id}>
-                            <Link href={`/blog/${slug.current}`}>
+                            <Link href={`/blog/${slug.current}`} passHref>
                                 <div className={styles.container}>
                                     <h1 className={styles.title}>{title}</h1>
 
