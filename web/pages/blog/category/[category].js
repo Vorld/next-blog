@@ -109,6 +109,7 @@ export async function getStaticProps(context) {
             posts,
             filterCategory: category,
         },
+        revalidate: 10,
     };
 }
 
