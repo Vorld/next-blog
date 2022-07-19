@@ -6,43 +6,69 @@ import Link from 'next/link';
 import Moment from 'react-moment';
 import Header from '../../../components/Header';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
+
 import styles from '../../../styles/Category.module.css';
 
-const BlogCategory = ({ open, posts }) => {
+const BlogCategory = ({ open, posts, filterCategory }) => {
     return (
         <div>
             <Header navOpen={open} heading={'BLOG'} />
-            {posts.map((post) => (
-                // <Link key={post.title} href={`/blog/${post.slug.current}`}>
-                //     {post.title}
-                // </Link>
-                <Link key={post.title} href={`/blog/${post.slug.current}`}>
-                    <div className={styles.container}>
-                        <h1 className={styles.title}>{post.title}</h1>
 
-                        <div className={styles.subtitle}>{post.subtitle}</div>
-                        <div className={styles.info}>
-                            <h5 className={styles.name}>{post.author}</h5>
-                            <span className={styles.date}>
-                                <Moment format='Do MMMM YYYY, ha'>
-                                    {post.publishedAt}
-                                </Moment>
-                            </span>
-
-                            <span className={styles.categories}>
-                                {post.categories.map((category) => (
-                                    <Link
-                                        key={category.title}
-                                        href={`/blog/category/${category.slug.current}`}
-                                    >
-                                        {category.title}
-                                    </Link>
-                                ))}
-                            </span>
-                        </div>
-                    </div>
+            <div className={styles.top}>
+                <h3 className={styles.filter}>
+                    Filtering for "{filterCategory}"
+                </h3>
+                <Link href='/blog'>
+                    <a className={styles.return}>
+                        <FontAwesomeIcon icon={faAngleLeft} />
+                        {' Back to all'}
+                    </a>
                 </Link>
-            ))}
+            </div>
+
+            {posts.map(
+                ({
+                    _id,
+                    title,
+                    subtitle,
+                    author,
+                    slug,
+                    publishedAt,
+                    categories,
+                }) => (
+                    // <Link key={post.title} href={`/blog/${post.slug.current}`}>
+                    //     {post.title}
+                    // </Link>
+                    <Link key={_id} href={`/blog/${slug.current}`}>
+                        <div className={styles.container}>
+                            <h1 className={styles.title}>{title}</h1>
+
+                            <div className={styles.subtitle}>{subtitle}</div>
+                            <div className={styles.info}>
+                                <h5 className={styles.name}>{author}</h5>
+                                <span className={styles.date}>
+                                    <Moment format='Do MMMM YYYY, ha'>
+                                        {publishedAt}
+                                    </Moment>
+                                </span>
+
+                                <span className={styles.categories}>
+                                    {categories.map((category) => (
+                                        <Link
+                                            key={category.title}
+                                            href={`/blog/category/${category.slug.current}`}
+                                        >
+                                            {category.title}
+                                        </Link>
+                                    ))}
+                                </span>
+                            </div>
+                        </div>
+                    </Link>
+                )
+            )}
         </div>
     );
 };
@@ -81,6 +107,7 @@ export async function getStaticProps(context) {
     return {
         props: {
             posts,
+            filterCategory: category,
         },
     };
 }
