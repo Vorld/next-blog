@@ -18,7 +18,7 @@ const BlogCategory = ({ open, posts, filterCategory }) => {
 
             <div className={styles.top}>
                 <h3 className={styles.filter}>
-                    Filtering for "{filterCategory}"
+                    Filtering for &quot;{filterCategory}&quot;
                 </h3>
                 <Link href='/blog'>
                     <a className={styles.return}>
