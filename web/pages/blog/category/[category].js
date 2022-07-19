@@ -32,6 +32,7 @@ const BlogCategory = ({ open, posts }) => {
                             <span className={styles.categories}>
                                 {post.categories.map((category) => (
                                     <Link
+                                        key={category.title}
                                         href={`/blog/category/${category.slug.current}`}
                                     >
                                         {category.title}
