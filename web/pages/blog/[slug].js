@@ -30,7 +30,7 @@ const Post = ({ post, open }) => {
 
     const {
         title = 'Missing title',
-        name = 'Missing name',
+        author = 'Missing author name',
         categories,
         date,
         body = [],
@@ -50,7 +50,7 @@ const Post = ({ post, open }) => {
                     </a>
                 </Link>
                 <h1 className={styles.title}>{title}</h1>
-                <h5 className={styles.name}>By {name}</h5>
+                <h5 className={styles.name}>By {author}</h5>
                 <span className={styles.date}>
                     <Moment format='Do MMMM YYYY, ha'>{date}</Moment>
                 </span>
@@ -98,7 +98,7 @@ const Post = ({ post, open }) => {
 
 const query = groq`*[_type == "post" && slug.current == $slug][0]{
   title,
-  "name": author->name,
+  "author": author->name,
   "categories": categories[]->{title, slug},
   "date": publishedAt,
   body,
