@@ -22,11 +22,11 @@ const debounce = (func, wait, immediate) => {
 
 const Navbar = (props) => {
     //Navbar logic
-    const [open, setOpen] = useState('close');
+    const [navOpen, setOpen] = useState('close');
 
     //context
     const handleClick = () => {
-        if (open === 'close') {
+        if (navOpen === 'close') {
             setOpen('open');
         } else {
             setOpen('close');
@@ -58,7 +58,7 @@ const Navbar = (props) => {
 
     return (
         <div>
-            <nav className={`${styles[open]} ${styles['main-nav']}`}>
+            <nav className={`${styles[navOpen]} ${styles['main-nav']}`}>
                 <ul>
                     <li>
                         <Link href='/'>
@@ -85,7 +85,7 @@ const Navbar = (props) => {
             <button
                 onClick={() => handleClick()}
                 className={`${styles['menu-button']}  ${
-                    !visible && open === 'close'
+                    !visible && navOpen === 'close'
                         ? styles['menu-button-hide']
                         : null
                 }`}
@@ -93,11 +93,11 @@ const Navbar = (props) => {
             <div className={styles.framebox}></div>
             <div
                 className={`${styles.shifter} ${
-                    open === 'open' ? styles.low : null
+                    navOpen === 'open' ? styles.low : null
                 }`}
             >
                 {React.cloneElement(props.children, {
-                    open: open,
+                    navOpen: navOpen,
                 })}
             </div>
         </div>

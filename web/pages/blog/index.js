@@ -7,10 +7,10 @@ import Moment from 'react-moment';
 
 import styles from '../../styles/Blog.module.css';
 
-const Blog = ({ posts, open }) => {
+const Blog = ({ posts, navOpen }) => {
     return (
         <div>
-            <Header navOpen={open} heading={'BLOG'} />
+            <Header navOpen={navOpen} heading={'BLOG'} />
             {posts.length > 0 &&
                 posts.map(
                     ({

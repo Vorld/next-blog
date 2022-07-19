@@ -11,10 +11,10 @@ import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 
 import styles from '../../../styles/Category.module.css';
 
-const BlogCategory = ({ open, posts, filterCategory }) => {
+const BlogCategory = ({ navOpen, posts, filterCategory }) => {
     return (
         <div>
-            <Header navOpen={open} heading={'BLOG'} />
+            <Header navOpen={navOpen} heading={'BLOG'} />
 
             <div className={styles.top}>
                 <h3 className={styles.filter}>

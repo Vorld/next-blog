@@ -23,7 +23,7 @@ import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const Post = ({ post, open }) => {
+const Post = ({ post, navOpen }) => {
     if (!post) {
         return null;
     }
@@ -40,7 +40,7 @@ const Post = ({ post, open }) => {
 
     return (
         <div>
-            <Header navOpen={open} heading={'BLOG'} />
+            <Header navOpen={navOpen} heading={'BLOG'} />
 
             <article className={styles.container}>
                 <Link href='/blog'>
@@ -138,5 +138,4 @@ export async function getStaticProps(context) {
 
 export default Post;
 
-//TODO: All article display on Blog Index
 // Refactor all haeder variable names
