@@ -8,7 +8,9 @@ const BlogCategory = ({ posts }) => {
     return (
         <div>
             {posts.map((post) => (
-                <Link href={`/blog/${post.slug.current}`}>{post.title}</Link>
+                <Link key={post.title} href={`/blog/${post.slug.current}`}>
+                    {post.title}
+                </Link>
             ))}
         </div>
     );
