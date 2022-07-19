@@ -22,8 +22,8 @@ const Blog = ({ posts, open }) => {
                         categories,
                         publishedAt,
                     }) => (
-                        <div>
-                            <Link key={_id} href={`/blog/${slug.current}`}>
+                        <div key={_id}>
+                            <Link href={`/blog/${slug.current}`}>
                                 <div className={styles.container}>
                                     <h1 className={styles.title}>{title}</h1>
 
