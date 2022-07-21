@@ -3,25 +3,58 @@ import styles from '../../styles/Post.module.css';
 import groq from 'groq';
 import client from '../../client';
 
-//MDX Support
-import { MDXRemote } from 'next-mdx-remote';
-import { serialize } from 'next-mdx-remote/serialize';
+//Portable Text
+import imageUrlBuilder from '@sanity/image-url';
+import { PortableText } from '@portabletext/react';
 
-//importable components for MDX
-import Typewriter from '../../components/Typewriter';
-import Moment from 'react-moment';
-import Latex from 'react-latex';
-const components = { Typewriter, Moment, Latex };
+import 'katex/dist/katex.min.css';
+import Latex from 'react-latex-next';
 
-// next import
+// Next import
 import Link from 'next/link';
 
+// Components
 import Header from '../../components/Header';
+import Moment from 'react-moment';
 
 //icons
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+// Image build for portable text
+function urlFor(source) {
+    return imageUrlBuilder(client).image(source);
+}
+
+// All custom ptComponents
+const ptComponents = {
+    types: {
+        image: ({ value }) => {
+            if (!value?.asset?._ref) {
+                return null;
+            }
+            return (
+                <img
+                    alt={value.alt || ' '}
+                    loading='lazy'
+                    src={urlFor(value)
+                        .width(320)
+                        .height(240)
+                        .fit('max')
+                        .auto('format')}
+                />
+            );
+        },
+        latex: ({ value, isInline }) => {
+            return isInline ? (
+                <Latex>{`$ ${value.body} $`}</Latex>
+            ) : (
+                <Latex>{`$$ ${value.body} $$`}</Latex>
+            );
+        },
+    },
+};
 
 const Post = ({ post, navOpen }) => {
     if (!post) {
@@ -56,7 +89,7 @@ const Post = ({ post, navOpen }) => {
                 </span>
 
                 <div className={styles.body}>
-                    <MDXRemote {...body} components={components} />
+                    <PortableText value={body} components={ptComponents} />
                 </div>
 
                 <span className={styles.categories}>
@@ -120,14 +153,7 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
     // It's important to default the slug so that it doesn't return "undefined"
     const { slug = '' } = context.params;
-    let post = await client.fetch(query, { slug });
-
-    const body = await serialize(post.body);
-
-    post = {
-        ...post,
-        body: body,
-    };
+    const post = await client.fetch(query, { slug });
 
     return {
         props: {
@@ -138,3 +164,5 @@ export async function getStaticProps(context) {
 }
 
 export default Post;
+
+// TODO: fix awkward spacing on linebreak
