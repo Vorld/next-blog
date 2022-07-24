@@ -56,6 +56,23 @@ const ptComponents = {
         poetry: ({ value }) => {
             return <div className={styles.poem}>{value.poem}</div>;
         },
+        file: ({ value }) => {
+            const { _ref } = value.asset;
+            const [_file, id, extension] = _ref.split('-');
+            const url =
+                'https://cdn.sanity.io/files/qjy3hvt5/production/' +
+                id +
+                '.' +
+                extension;
+            return (
+                <iframe
+                    src={`https://docs.google.com/gview?url=${url}&embedded=true`}
+                    width='100%'
+                    height='500px'
+                    frameborder='0'
+                ></iframe>
+            );
+        },
     },
 };
 

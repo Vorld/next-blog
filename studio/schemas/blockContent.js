@@ -71,6 +71,7 @@ export default {
             type: 'image',
             options: { hotspot: true },
         },
+        { type: 'file' },
         { type: 'latex', icon: mathIcon, title: 'Math block' },
         {
             type: 'poetry',
