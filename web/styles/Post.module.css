@@ -180,6 +180,10 @@
     margin-bottom: 1vh;
 }
 
+/* .body p {
+    margin: 1px;
+} */
+
 .body h1 {
     position: relative;
     margin-top: 1rem;
@@ -220,6 +224,11 @@
     color: #777777;
 
     padding-right: 0;
+}
+
+.poem {
+    white-space: pre-wrap;
+    margin-bottom: 20px;
 }
 
 .categories a {
