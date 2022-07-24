@@ -53,6 +53,9 @@ const ptComponents = {
                 <Latex>{`$$ ${value.body} $$`}</Latex>
             );
         },
+        poetry: ({ value }) => {
+            return <div className={styles.poem}>{value.poem}</div>;
+        },
     },
 };
 

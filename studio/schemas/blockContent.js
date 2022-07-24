@@ -8,8 +8,13 @@
  *    type: 'blockContent'
  *  }
  */
+
 import React from 'react';
+
 const mathIcon = () => <span style={{ fontWeight: 'bold' }}>∑</span>;
+const poetryPreview = (props) => (
+    <span style={{ fontWeight: 'bold' }}>{props.children}</span>
+);
 
 export default {
     title: 'Block Content',
@@ -67,5 +72,12 @@ export default {
             options: { hotspot: true },
         },
         { type: 'latex', icon: mathIcon, title: 'Math block' },
+        {
+            type: 'poetry',
+            title: 'Poems',
+            blockEditor: {
+                render: poetryPreview,
+            },
+        },
     ],
 };
