@@ -12,6 +12,7 @@ import Latex from 'react-latex-next';
 
 // Next import
 import Link from 'next/link';
+import Image from 'next/image';
 
 // Components
 import Header from '../../components/Header';
@@ -35,7 +36,7 @@ const ptComponents = {
                 return null;
             }
             return (
-                <img
+                <Image
                     alt={value.alt || ' '}
                     loading='lazy'
                     src={urlFor(value)
@@ -69,7 +70,7 @@ const ptComponents = {
                     src={`https://docs.google.com/gview?url=${url}&embedded=true`}
                     width='100%'
                     height='500px'
-                    frameborder='0'
+                    frameBorder='0'
                 ></iframe>
             );
         },
