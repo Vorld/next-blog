@@ -71,11 +71,11 @@ export default {
             type: 'image',
             options: { hotspot: true },
         },
-        { type: 'file' },
+        { type: 'file', title: 'PDF' },
         { type: 'latex', icon: mathIcon, title: 'Math block' },
         {
             type: 'poetry',
-            title: 'Poems',
+            title: 'Poem',
             blockEditor: {
                 render: poetryPreview,
             },
