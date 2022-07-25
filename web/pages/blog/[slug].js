@@ -70,6 +70,7 @@ const ptComponents = {
                     src={`https://docs.google.com/gview?url=${url}&embedded=true`}
                     width='100%'
                     height='500px'
+                    style={{ marginBottom: '20px' }}
                     frameBorder='0'
                 ></iframe>
             );
