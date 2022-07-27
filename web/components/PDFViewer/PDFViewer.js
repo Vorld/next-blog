@@ -2,13 +2,13 @@ import React, { useEffect } from 'react';
 import ViewSDKClient from '../../components/PDFViewer/ViewSDKClient';
 import Script from 'next/script';
 
-const InLine = () => {
+const PDFViewer = ({ url }) => {
     useEffect(() => {
         const viewSDKClient = new ViewSDKClient();
 
         viewSDKClient.ready().then(() => {
             /* Invoke file preview */
-            viewSDKClient.previewFile('pdf-div', {
+            viewSDKClient.previewFile(url, 'pdf-div', {
                 /* Pass the embed mode option here */
                 embedMode: 'IN_LINE',
             });
@@ -23,4 +23,4 @@ const InLine = () => {
     );
 };
 
-export default InLine;
+export default PDFViewer;
