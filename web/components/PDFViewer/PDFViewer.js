@@ -14,7 +14,7 @@ const PDFViewer = ({ url, id }) => {
                 embedMode: 'SIZED_CONTAINER',
             });
         });
-    }, []);
+    }, [url, id]);
 
     return (
         <div>
