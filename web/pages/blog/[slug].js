@@ -66,14 +66,7 @@ const ptComponents = {
                 id +
                 '.' +
                 extension;
-            return (
-                // <iframe
-                //     src={`${url}`}
-                //     frameBorder='0'
-                //     className={styles.pdfViewer}
-                // ></iframe>
-                <PDFViewer url={url} id={id} />
-            );
+            return <PDFViewer url={url} id={id} />;
         },
     },
 };
@@ -187,4 +180,4 @@ export async function getStaticProps(context) {
 
 export default Post;
 
-// TODO: fix awkward spacing on linebreak
+// TODO: Make the PDF Viewer use the name of the file instead of the id
