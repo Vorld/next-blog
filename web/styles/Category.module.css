@@ -185,4 +185,13 @@
     .return {
         width: 75vw;
     }
+
+    .categories {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .categories a {
+        margin-top: 10px;
+    }
 }

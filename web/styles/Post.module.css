@@ -129,53 +129,6 @@
     transition: 0.1;
 }
 
-@media only screen and (min-width: 768px) {
-    .return:hover::before {
-        opacity: 0;
-        transform: scale(0.5, 0.5);
-    }
-    .return:hover::after {
-        opacity: 1;
-        transform: scale(1, 1);
-    }
-
-    .nav-button:hover::before {
-        opacity: 0;
-        transform: scale(0.5, 0.5);
-    }
-    .nav-button:hover::after {
-        opacity: 1;
-        transform: scale(1, 1);
-    }
-}
-
-@media screen and (max-width: 767px) {
-    .return {
-        /* margin-left: 30px; */
-        /* font-size: 0; */
-        width: 75vw;
-    }
-
-    .blog-title {
-        padding-left: 30px;
-        margin-top: 35px;
-        font-size: 1.75rem;
-    }
-
-    .nav-buttons {
-        display: flex;
-        width: 75%;
-        flex-direction: row;
-        justify-content: space-between;
-
-        margin: auto;
-    }
-
-    .nav-button {
-        width: 50px;
-    }
-}
-
 .body {
     margin-bottom: 1vh;
 }
@@ -226,11 +179,6 @@
     padding-right: 0;
 }
 
-.poem {
-    white-space: pre-wrap;
-    margin-bottom: 20px;
-}
-
 .categories a {
     font-weight: 300;
     font-size: 1rem;
@@ -243,4 +191,76 @@
     padding: 10px;
 
     text-decoration: none;
+}
+
+/* Custom Portable Text Component CSS */
+.poem {
+    white-space: pre-wrap;
+    margin-bottom: 20px;
+}
+
+.pdfViewer {
+    width: 100%;
+    height: 500px;
+    margin-bottom: 20px;
+}
+
+@media only screen and (min-width: 768px) {
+    .return:hover::before {
+        opacity: 0;
+        transform: scale(0.5, 0.5);
+    }
+    .return:hover::after {
+        opacity: 1;
+        transform: scale(1, 1);
+    }
+
+    .nav-button:hover::before {
+        opacity: 0;
+        transform: scale(0.5, 0.5);
+    }
+    .nav-button:hover::after {
+        opacity: 1;
+        transform: scale(1, 1);
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .return {
+        /* margin-left: 30px; */
+        /* font-size: 0; */
+        width: 75vw;
+    }
+
+    .blog-title {
+        padding-left: 30px;
+        margin-top: 35px;
+        font-size: 1.75rem;
+    }
+
+    .nav-buttons {
+        display: flex;
+        width: 75%;
+        flex-direction: row;
+        justify-content: space-between;
+
+        margin: auto;
+    }
+
+    .nav-button {
+        width: 50px;
+    }
+
+    .categories {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .categories a {
+        margin-top: 10px;
+    }
+
+    .pdfViewer {
+        margin-bottom: auto;
+    }
 }

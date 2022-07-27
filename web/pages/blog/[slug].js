@@ -66,19 +66,10 @@ const ptComponents = {
                 '.' +
                 extension;
             return (
-                // <iframe
-                //     src={`https://docs.google.com/gview?url=${url}&embedded=true`}
-                // width='100%'
-                // height='500px'
-                // style={{ marginBottom: '20px' }}
-                //     frameBorder='0'
-                // ></iframe>
                 <iframe
                     src={`${url}`}
                     frameBorder='0'
-                    width='100%'
-                    height='500px'
-                    style={{ marginBottom: '20px' }}
+                    className={styles.pdfViewer}
                 ></iframe>
             );
         },
