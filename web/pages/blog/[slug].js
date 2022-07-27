@@ -13,6 +13,7 @@ import Latex from 'react-latex-next';
 // Next import
 import Link from 'next/link';
 import Image from 'next/image';
+import Head from 'next/head';
 
 // Components
 import Header from '../../components/Header';
@@ -88,6 +89,9 @@ const Post = ({ post, navOpen }) => {
 
     return (
         <div>
+            <Head>
+                <title>Blog | Kulkarni Venugopal</title>
+            </Head>
             <Header navOpen={navOpen} heading={'BLOG'} />
 
             <article className={styles.container}>

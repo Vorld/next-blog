@@ -3,6 +3,8 @@ import groq from 'groq';
 import client from '../../../client';
 
 import Link from 'next/link';
+import Head from 'next/head';
+
 import Moment from 'react-moment';
 import Header from '../../../components/Header';
 
@@ -14,6 +16,9 @@ import styles from '../../../styles/Category.module.css';
 const BlogCategory = ({ navOpen, posts, filterCategory }) => {
     return (
         <div>
+            <Head>
+                <title>Blog | Kulkarni Venugopal</title>
+            </Head>
             <Header navOpen={navOpen} heading={'BLOG'} />
 
             <div className={styles.top}>
@@ -38,9 +43,6 @@ const BlogCategory = ({ navOpen, posts, filterCategory }) => {
                     publishedAt,
                     categories,
                 }) => (
-                    // <Link key={post.title} href={`/blog/${post.slug.current}`}>
-                    //     {post.title}
-                    // </Link>
                     <Link key={_id} href={`/blog/${slug.current}`} passHref>
                         <div className={styles.container}>
                             <h1 className={styles.title}>{title}</h1>
