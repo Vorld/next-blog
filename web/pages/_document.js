@@ -14,6 +14,10 @@ export default function Document() {
                 />
             </Head>
             <body>
+                <script
+                    type='text/javascript'
+                    src='https://documentcloud.adobe.com/view-sdk/main.js'
+                ></script>
                 <Main />
                 <NextScript />
             </body>

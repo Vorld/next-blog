@@ -5,6 +5,7 @@ class ViewSDKClient {
                 resolve();
             } else {
                 /* Wait for Adobe Document Services PDF Embed API to be ready */
+
                 document.addEventListener('adobe_dc_view_sdk.ready', () => {
                     resolve();
                 });
@@ -20,7 +21,7 @@ class ViewSDKClient {
     previewFile(divId, viewerConfig) {
         const config = {
             /* Pass your registered client id */
-            clientId: '1edf9528a1744a8fb97053597cb9f740',
+            clientId: '87f2c1c2038145249668b30911171dcb',
         };
         if (divId) {
             /* Optional only for Light Box embed mode */
@@ -67,10 +68,12 @@ class ViewSDKClient {
         /* Initialize the AdobeDC View object */
         this.adobeDCView = new window.AdobeDC.View({
             /* Pass your registered client id */
-            clientId: '87f2c1c2038145249668b30911171dcb',
+            clientId: 'e6ba4a5892f94e548f5248196ac15ba0',
             /* Pass the div id in which PDF should be rendered */
             divId,
         });
+
+        console.log('obtained file promise');
 
         /* Invoke the file preview API on Adobe DC View object */
         this.adobeDCView.previewFile(
