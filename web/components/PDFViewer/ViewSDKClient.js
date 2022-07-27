@@ -67,7 +67,7 @@ class ViewSDKClient {
         /* Initialize the AdobeDC View object */
         this.adobeDCView = new window.AdobeDC.View({
             /* Pass your registered client id */
-            clientId: '8c0cd670273d451cbc9b351b11d22318',
+            clientId: '87f2c1c2038145249668b30911171dcb',
             /* Pass the div id in which PDF should be rendered */
             divId,
         });
