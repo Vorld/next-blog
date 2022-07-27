@@ -2,6 +2,8 @@ import groq from 'groq';
 import client from '../../client';
 
 import Link from 'next/link';
+import Head from 'next/head';
+
 import Header from '../../components/Header';
 import Moment from 'react-moment';
 
@@ -10,6 +12,9 @@ import styles from '../../styles/Blog.module.css';
 const Blog = ({ posts, navOpen }) => {
     return (
         <div>
+            <Head>
+                <title>Blog | Kulkarni Venugopal</title>
+            </Head>
             <Header navOpen={navOpen} heading={'BLOG'} />
             {posts.length > 0 &&
                 posts.map(

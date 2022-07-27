@@ -199,12 +199,6 @@
     margin-bottom: 20px;
 }
 
-.pdfViewer {
-    width: 100%;
-    height: 500px;
-    margin-bottom: 20px;
-}
-
 @media only screen and (min-width: 768px) {
     .return:hover::before {
         opacity: 0;
@@ -227,8 +221,6 @@
 
 @media screen and (max-width: 767px) {
     .return {
-        /* margin-left: 30px; */
-        /* font-size: 0; */
         width: 75vw;
     }
 
@@ -258,9 +250,5 @@
 
     .categories a {
         margin-top: 10px;
-    }
-
-    .pdfViewer {
-        margin-bottom: auto;
     }
 }

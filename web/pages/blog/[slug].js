@@ -13,10 +13,12 @@ import Latex from 'react-latex-next';
 // Next import
 import Link from 'next/link';
 import Image from 'next/image';
+import Head from 'next/head';
 
 // Components
 import Header from '../../components/Header';
 import Moment from 'react-moment';
+import PDFViewer from '../../components/PDFViewer/PDFViewer';
 
 //icons
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
@@ -65,13 +67,7 @@ const ptComponents = {
                 id +
                 '.' +
                 extension;
-            return (
-                <iframe
-                    src={`${url}`}
-                    frameBorder='0'
-                    className={styles.pdfViewer}
-                ></iframe>
-            );
+            return <PDFViewer url={url} id={id} />;
         },
     },
 };
@@ -93,6 +89,9 @@ const Post = ({ post, navOpen }) => {
 
     return (
         <div>
+            <Head>
+                <title>Blog | Kulkarni Venugopal</title>
+            </Head>
             <Header navOpen={navOpen} heading={'BLOG'} />
 
             <article className={styles.container}>
@@ -185,4 +184,4 @@ export async function getStaticProps(context) {
 
 export default Post;
 
-// TODO: fix awkward spacing on linebreak
+// TODO: Make the PDF Viewer use the name of the file instead of the id
