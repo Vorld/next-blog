@@ -17,6 +17,7 @@ import Image from 'next/image';
 // Components
 import Header from '../../components/Header';
 import Moment from 'react-moment';
+import PDFViewer from '../../components/PDFViewer/PDFViewer';
 
 //icons
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
@@ -66,11 +67,12 @@ const ptComponents = {
                 '.' +
                 extension;
             return (
-                <iframe
-                    src={`${url}`}
-                    frameBorder='0'
-                    className={styles.pdfViewer}
-                ></iframe>
+                // <iframe
+                //     src={`${url}`}
+                //     frameBorder='0'
+                //     className={styles.pdfViewer}
+                // ></iframe>
+                <PDFViewer />
             );
         },
     },
