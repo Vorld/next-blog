@@ -1,0 +1,11 @@
+.pdfViewer {
+    width: 100%;
+    height: 500px;
+    margin-bottom: 20px;
+}
+
+@media screen and (max-width: 767px) {
+    .pdfViewer {
+        margin-bottom: auto;
+    }
+}
