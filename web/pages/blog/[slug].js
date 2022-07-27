@@ -72,7 +72,7 @@ const ptComponents = {
                 //     frameBorder='0'
                 //     className={styles.pdfViewer}
                 // ></iframe>
-                <PDFViewer url={url} />
+                <PDFViewer url={url} id={id} />
             );
         },
     },
