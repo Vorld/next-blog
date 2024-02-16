@@ -21,7 +21,7 @@ class ViewSDKClient {
     previewFile(url, divId, viewerConfig) {
         const config = {
             /* Pass your registered client id */
-            clientId: '87f2c1c2038145249668b30911171dcb',
+            clientId: 'a125ad0834444ff78321c69b14f5c24b',
         };
         if (divId) {
             /* Optional only for Light Box embed mode */
