@@ -25,11 +25,8 @@ const BlogCategory = ({ navOpen, posts, filterCategory }) => {
                 <h3 className={styles.filter}>
                     Filtering for &quot;{filterCategory}&quot;
                 </h3>
-                <Link href='/blog'>
-                    <a className={styles.return}>
-                        <FontAwesomeIcon icon={faAngleLeft} />
-                        {' Back to all'}
-                    </a>
+                <Link href='/blog' className={styles.return}>
+                    {' Back to all'}
                 </Link>
             </div>
 

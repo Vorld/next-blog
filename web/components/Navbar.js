@@ -61,23 +61,23 @@ const Navbar = (props) => {
             <nav className={`${styles[navOpen]} ${styles['main-nav']}`}>
                 <ul>
                     <li>
-                        <Link href='/'>
-                            <a onClick={() => handleClick()}>HOME</a>
+                        <Link href='/' onClick={() => handleClick()}>
+                            HOME
                         </Link>
                     </li>
                     <li>
                         <Link onClick={() => handleClick()} href='/photos'>
-                            <a onClick={() => handleClick()}>PHOTOS</a>
+                            PHOTOS
                         </Link>
                     </li>
                     <li>
                         <Link onClick={() => handleClick()} href='/music'>
-                            <a onClick={() => handleClick()}>MUSIC</a>
+                            MUSIC
                         </Link>
                     </li>
                     <li>
                         <Link onClick={() => handleClick()} href='/blog'>
-                            <a onClick={() => handleClick()}>BLOG</a>
+                            BLOG
                         </Link>
                     </li>
                 </ul>

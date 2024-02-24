@@ -22,12 +22,15 @@ const Photos = ({ navOpen, images }) => {
             </Head>
             <Header navOpen={navOpen} heading={'PHOTOS'} />
             <div className={styles.container}>
-                {images.map(
-                    (image) =>
-                        urlFor(image) && (
-                            <img className={styles.image} src={urlFor(image)} />
-                        )
-                )}
+                {images.map((image) => {
+                    urlFor(image) && (
+                        <img
+                            className={styles.image}
+                            src={urlFor(image)}
+                            key={image._key}
+                        />
+                    );
+                })}
             </div>
         </div>
     );

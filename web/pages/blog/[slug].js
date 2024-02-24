@@ -95,11 +95,9 @@ const Post = ({ post, navOpen }) => {
             <Header navOpen={navOpen} heading={'BLOG'} />
 
             <article className={styles.container}>
-                <Link href='/blog'>
-                    <a className={styles.return}>
-                        <FontAwesomeIcon icon={faAngleLeft} />
-                        {' Back to all'}
-                    </a>
+                <Link href='/blog' className={styles.return}>
+                    <FontAwesomeIcon icon={faAngleLeft} />
+                    {' Back to all'}
                 </Link>
                 <h1 className={styles.title}>{title}</h1>
                 <h5 className={styles.name}>By {author}</h5>
@@ -129,19 +127,16 @@ const Post = ({ post, navOpen }) => {
                         href={`/blog/${previousPost}`}
                         className={styles['nav-button']}
                     >
-                        <a className={styles['nav-button']}>
-                            <FontAwesomeIcon icon={faAngleLeft} />
-                        </a>
+                        <FontAwesomeIcon icon={faAngleLeft} />
                     </Link>
                 ) : (
                     <div></div>
                 )}
                 {nextPost ? (
-                    <Link href={`/blog/${nextPost}`}>
-                        <a className={styles['nav-button']}>
-                            <FontAwesomeIcon icon={faAngleRight} />
-                        </a>
-                    </Link>
+                    <Link
+                        href={`/blog/${nextPost}`}
+                        className={styles['nav-button']}
+                    ></Link>
                 ) : null}
             </div>
         </div>
