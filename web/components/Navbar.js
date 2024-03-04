@@ -1,3 +1,5 @@
+'use client';
+
 import styles from '../styles/components/Navbar.module.css';
 
 import React, { useState, useEffect } from 'react';

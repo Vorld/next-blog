@@ -1,3 +1,5 @@
+'use client';
+
 import styles from '../styles/components/Typewriter.module.css';
 
 import React, { useState, useEffect } from 'react';
@@ -25,11 +27,21 @@ const Typewriter = ({ messages }) => {
             }, 500);
         } else if (reverse) {
             timer = setTimeout(() => {
-                setText(messages[currentMessage].substring(0, currentText.length - 1));
+                setText(
+                    messages[currentMessage].substring(
+                        0,
+                        currentText.length - 1
+                    )
+                );
             }, 50);
         } else if (currentText !== messages[currentMessage]) {
             timer = setTimeout(() => {
-                setText(messages[currentMessage].substring(0, currentText.length + 1));
+                setText(
+                    messages[currentMessage].substring(
+                        0,
+                        currentText.length + 1
+                    )
+                );
             }, 200);
         }
         return () => {
