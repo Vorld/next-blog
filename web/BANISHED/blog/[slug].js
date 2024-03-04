@@ -136,7 +136,9 @@ const Post = ({ post, navOpen }) => {
                     <Link
                         href={`/blog/${nextPost}`}
                         className={styles['nav-button']}
-                    ></Link>
+                    >
+                        <FontAwesomeIcon icon={faAngleRight} />
+                    </Link>
                 ) : null}
             </div>
         </div>

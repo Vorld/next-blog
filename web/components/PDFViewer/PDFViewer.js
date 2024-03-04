@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useEffect } from 'react';
 import ViewSDKClient from '../../components/PDFViewer/ViewSDKClient';
 import Script from 'next/script';
