@@ -9,7 +9,7 @@
 }
 
 .cursor {
-    border-left: 0.02em solid #000000;
+    border-left: 0.02em solid #e0e0e0;
     animation: blink 0.7s steps(1) infinite;
 }
 
