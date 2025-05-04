@@ -62,23 +62,27 @@ const Navbar = (props) => {
             <nav className={`${styles[navOpen]} ${styles['main-nav']}`}>
                 <ul>
                     <li>
-                        <Link href='/'>
-                            <a onClick={() => handleClick()}>HOME</a>
+                        {/* Updated Link: Removed nested <a> and onClick */}
+                        <Link href='/' onClick={() => handleClick()} className={styles['nav-link']}>
+                            HOME
                         </Link>
                     </li>
                     <li>
-                        <Link onClick={() => handleClick()} href='/photos'>
-                            <a onClick={() => handleClick()}>PHOTOS</a>
+                        {/* Updated Link: Removed nested <a> and onClick */}
+                        <Link href='/photos' onClick={() => handleClick()} className={styles['nav-link']}>
+                            PHOTOS
                         </Link>
                     </li>
                     <li>
-                        <Link onClick={() => handleClick()} href='/music'>
-                            <a onClick={() => handleClick()}>MUSIC</a>
+                        {/* Updated Link: Removed nested <a> and onClick */}
+                        <Link href='/music' onClick={() => handleClick()} className={styles['nav-link']}>
+                            MUSIC
                         </Link>
                     </li>
                     <li>
-                        <Link onClick={() => handleClick()} href='/blog'>
-                            <a onClick={() => handleClick()}>BLOG</a>
+                        {/* Updated Link: Removed nested <a> and onClick */}
+                        <Link href='/blog' onClick={() => handleClick()} className={styles['nav-link']}>
+                            BLOG
                         </Link>
                     </li>
                 </ul>

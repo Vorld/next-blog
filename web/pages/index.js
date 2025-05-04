@@ -9,6 +9,7 @@ import styles from '../styles/Home.module.css';
 let msgs = ['HELLO.', 'I AM VENU.'];
 
 const Home = () => {
+    // TODO: Update all dependencies
     // TODO: Insert a profile photo.
     // TODO: Update description to reflect my current place and interests
     // TODO: Random dynamic elements like bits that fly off near the cursor.
@@ -58,8 +59,8 @@ const Home = () => {
                 <h2 className={styles.header}>CONTACT ME</h2>
                 <p>
                     If you need anything, I&apos;ll always be one{' '}
-                    <Link href='mailto:KulkarniVenugopal@outlook.com'>
-                        <a className={styles.emailLink}>email</a>
+                    <Link href='mailto:KulkarniVenugopal@outlook.com' className={styles.emailLink}>
+                        email
                     </Link>{' '}
                     away.
                 </p>

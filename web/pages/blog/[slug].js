@@ -95,11 +95,10 @@ const Post = ({ post, navOpen }) => {
             <Header navOpen={navOpen} heading={'BLOG'} />
 
             <article className={styles.container}>
-                <Link href='/blog'>
-                    <a className={styles.return}>
-                        <FontAwesomeIcon icon={faAngleLeft} />
-                        {' Back to all'}
-                    </a>
+                {/* Updated Link: Removed nested <a> and moved className */}
+                <Link href='/blog' className={styles.return}>
+                    <FontAwesomeIcon icon={faAngleLeft} />
+                    {' Back to all'}
                 </Link>
                 <h1 className={styles.title}>{title}</h1>
                 <h5 className={styles.name}>By {author}</h5>
@@ -125,22 +124,20 @@ const Post = ({ post, navOpen }) => {
 
             <div className={styles['nav-buttons']}>
                 {previousPost ? (
+                    /* Updated Link: Removed nested <a> and moved className */
                     <Link
                         href={`/blog/${previousPost}`}
                         className={styles['nav-button']}
                     >
-                        <a className={styles['nav-button']}>
-                            <FontAwesomeIcon icon={faAngleLeft} />
-                        </a>
+                        <FontAwesomeIcon icon={faAngleLeft} />
                     </Link>
                 ) : (
                     <div></div>
                 )}
                 {nextPost ? (
-                    <Link href={`/blog/${nextPost}`}>
-                        <a className={styles['nav-button']}>
-                            <FontAwesomeIcon icon={faAngleRight} />
-                        </a>
+                    /* Updated Link: Removed nested <a> and moved className */
+                    <Link href={`/blog/${nextPost}`} className={styles['nav-button']}>
+                        <FontAwesomeIcon icon={faAngleRight} />
                     </Link>
                 ) : null}
             </div>

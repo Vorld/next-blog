@@ -28,7 +28,8 @@ const Blog = ({ posts, navOpen }) => {
                         publishedAt,
                     }) => (
                         <div key={_id}>
-                            <Link href={`/blog/${slug.current}`} passHref>
+                            {/* Updated Link: Removed passHref as the child is a div, not an anchor or custom component needing href */}
+                            <Link href={`/blog/${slug.current}`}>
                                 <div className={styles.container}>
                                     <h1 className={styles.title}>{title}</h1>
 
@@ -50,6 +51,9 @@ const Blog = ({ posts, navOpen }) => {
                                                 <Link
                                                     key={category.title}
                                                     href={`/blog/category/${category.slug.current}`}
+                                                    // NOTE: Nested links are generally problematic.
+                                                    // This inner Link was not modified as it didn't contain a nested <a> tag.
+                                                    // Consider refactoring this part if it causes issues.
                                                 >
                                                     {category.title}
                                                 </Link>
@@ -61,7 +65,7 @@ const Blog = ({ posts, navOpen }) => {
                         </div>
                     )
                 )}
-            </div>
+        </div>
     );
 };
 

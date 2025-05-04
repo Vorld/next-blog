@@ -10,6 +10,9 @@ import Header from '../components/Header';
 
 import styles from '../styles/Photos.module.css';
 
+// TODO: Create thumbnails for better performance
+// TODO: Add a modal to view full images in fullscreen
+
 function urlFor(source) {
     return imageUrlBuilder(client).image(source);
 }
