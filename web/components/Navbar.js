@@ -20,6 +20,7 @@ const debounce = (func, wait, immediate) => {
     };
 };
 
+// TODO: Make the button better and more obvious.
 const Navbar = (props) => {
     //Navbar logic
     const [navOpen, setOpen] = useState('close');
@@ -89,7 +90,13 @@ const Navbar = (props) => {
                         ? styles['menu-button-hide']
                         : null
                 }`}
-            ></button>
+            >
+                <div className={styles['animated-squares']}>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </button>
             <div className={styles.framebox}></div>
             <div
                 className={`${styles.shifter} ${

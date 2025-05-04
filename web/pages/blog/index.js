@@ -61,7 +61,7 @@ const Blog = ({ posts, navOpen }) => {
                         </div>
                     )
                 )}
-        </div>
+            </div>
     );
 };
 

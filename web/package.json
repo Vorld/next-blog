@@ -10,7 +10,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
-    "@portabletext/react": "^1.0.6",
+    "@portabletext/react": "3.2.1",
     "@sanity/client": "^3.3.2",
     "@sanity/image-url": "^1.0.1",
     "groq": "^2.29.3",
@@ -19,8 +19,8 @@
     "next-mdx-remote": "^4.0.3",
     "react": "18.0.0",
     "react-dom": "18.0.0",
-    "react-latex": "^2.0.0",
-    "react-latex-next": "^2.1.0",
+    "react-latex": "2.0.0",
+    "react-latex-next": "3.0.0",
     "react-moment": "^1.1.2"
   },
   "devDependencies": {

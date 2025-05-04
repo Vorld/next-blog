@@ -28,7 +28,8 @@ a {
 body {
     font-family: 'Roboto', sans-serif;
     /* font-family: 'Roboto', sans-serif; */
-    background-color: #f8f9fa;
+    background-color: #121212;
+    color: #e0e0e0;
 }
 
 h1,

@@ -1,5 +1,5 @@
 .landing {
-  color: #000;
+  color: #e0e0e0;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -39,6 +39,32 @@
 
   height: 100vh;
   padding: 0% 25% 0% 25%;
+}
+
+.section1 {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+}
+
+.section2 {
+  background-color: #2c2c2c;
+  color: #e0e0e0;
+}
+
+.section3 {
+  background-color: #121212; 
+  color: #e0e0e0;
+}
+
+.emailLink {
+  color: #e0e0e0;
+  text-decoration: underline;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.emailLink:hover {
+  color: #7fb5ff;
 }
 
 @media only screen and (max-width: 767px) {

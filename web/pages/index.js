@@ -9,6 +9,9 @@ import styles from '../styles/Home.module.css';
 let msgs = ['HELLO.', 'I AM VENU.'];
 
 const Home = () => {
+    // TODO: Insert a profile photo.
+    // TODO: Update description to reflect my current place and interests
+    // TODO: Random dynamic elements like bits that fly off near the cursor.
     return (
         <div>
             <Head>
@@ -23,7 +26,7 @@ const Home = () => {
             <div className={styles.landing}>
                 <Typewriter messages={msgs} />
             </div>
-            <div className={styles.para} style={{ background: '#DEE2E6' }}>
+            <div className={`${styles.para} ${styles.section1}`}>
                 <h2 className={styles.header}>ME</h2>
                 <p>
                     I am Kulkarni <b>Venu</b>gopal.
@@ -36,7 +39,7 @@ const Home = () => {
                     <br /> <br />I like to <b>learn</b>.
                 </p>
             </div>
-            <div className={styles.para} style={{ background: '#CED4DA' }}>
+            <div className={`${styles.para} ${styles.section2}`}>
                 <h2 className={styles.header}>ABOUT THIS WEBSITE</h2>
                 <p>
                     I like minimalism. Less is more.
@@ -51,15 +54,12 @@ const Home = () => {
                     <Link href='https://www.hugeinc.com/'>Huge</Link>.
                 </p>
             </div>
-            <div
-                className={styles.para}
-                style={{ background: '#343A40', color: '#F8F9FA' }}
-            >
+            <div className={`${styles.para} ${styles.section3}`}>
                 <h2 className={styles.header}>CONTACT ME</h2>
                 <p>
                     If you need anything, I&apos;ll always be one{' '}
                     <Link href='mailto:KulkarniVenugopal@outlook.com'>
-                        email
+                        <a className={styles.emailLink}>email</a>
                     </Link>{' '}
                     away.
                 </p>
