@@ -1,8 +1,6 @@
 import groq from 'groq';
 import client from '../client';
 
-import imageUrlBuilder from '@sanity/image-url';
-
 import Head from 'next/head';
 import Image from 'next/image';
 
@@ -13,10 +11,6 @@ import styles from '../styles/Photos.module.css';
 // TODO: Create thumbnails for better performance
 // TODO: Add a modal to view full images in fullscreen
 
-function urlFor(source) {
-    return imageUrlBuilder(client).image(source);
-}
-
 const Photos = ({ navOpen, images }) => {
     return (
         <div>
@@ -25,34 +19,44 @@ const Photos = ({ navOpen, images }) => {
             </Head>
             <Header navOpen={navOpen} heading={'PHOTOS'} />
             <div className={styles.container}>
-                {images.map(
-                    (image) =>
-                        urlFor(image) && (
-                            <img className={styles.image} src={urlFor(image)} />
-                        )
-                )}
+                {images.map((image) => {
+                    if (!image?.url || !image?.dimensions) return null;
+                    return (
+                        <div 
+                            key={image.id} 
+                            className={styles.imageWrapper}
+                        >
+                            <Image
+                                src={image.url}
+                                alt={image.alt || "Gallery image"}
+                                className={styles.image}
+                                width={image.dimensions.width}
+                                height={image.dimensions.height}
+                                sizes="90vw, 45vh"
+                                quality={50}
+                            />
+                        </div>
+                    );
+                })}
             </div>
         </div>
     );
 };
 
-// export async function getStaticPaths() {
-//     const paths = await client.fetch(
-//         groq`*[_type == "galleryImage" && defined(slug.current)][].slug.current`
-//     );
-
-//     return {
-//         paths: paths.map((slug) => ({ params: { slug } })),
-//         fallback: 'blocking',
-//     };
-// }
-
 export async function getStaticProps() {
-    const gallery = await client.fetch(groq`*[_type == "gallery"][0]{images}`);
+    // Enhanced query to fetch necessary image metadata
+    const gallery = await client.fetch(groq`*[_type == "gallery"][0]{
+        "images": images[]{
+            "id": _key,
+            "alt": asset->alt,
+            "url": asset->url,
+            "dimensions": asset->metadata.dimensions
+        }
+    }`);
 
     return {
         props: {
-            images: gallery.images,
+            images: gallery?.images?.filter(Boolean) || [],
         },
         revalidate: 10,
     };

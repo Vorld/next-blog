@@ -3,30 +3,46 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-
     gap: 20px;
     max-width: 100vw;
     background-color: #121212;
-
     align-items: center;
     justify-content: center;
-
     pointer-events: none;
 }
 
-.container img {
-    max-height: 45vh;
+/* Style for the wrapper div around each Next.js Image component */
+.imageWrapper {
+    position: relative;
     pointer-events: auto;
-
     transition: all 0.3s;
 }
 
+/* Maintain the styling for the image itself */
+.image {
+    max-height: 45vh;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important;
+}
+
 @media only screen and (min-width: 767px) {
-    .container:hover img {
+    .imageWrapper {
+        height: 45vh;
+        width: auto;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .image {
+        max-height: 45vh !important;
+    }
+    
+    .container:hover .imageWrapper {
         filter: grayscale(1);
     }
 
-    .container img:hover {
+    .container .imageWrapper:hover {
         filter: grayscale(0);
         transform: scale(1.05);
     }
@@ -34,9 +50,22 @@
 
 @media only screen and (max-width: 767px) {
     .container {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
     }
 
-    .container img {
-        max-width: 90vw;
+    .imageWrapper {
+        width: 90vw;
+        margin-bottom: 0;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .image {
+        width: 90vw !important;
+        max-width: 90vw !important;
+        height: auto !important;
+        object-fit: contain !important;
     }
 }
