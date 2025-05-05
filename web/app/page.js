@@ -1,30 +1,30 @@
 //Components
-import Head from 'next/head';
-import Image from 'next/image';
+// Removed Head import, use metadata in layout or page
+import Image from 'next/image'; // Keep Image if used
 import Link from 'next/link';
-import Typewriter from '../components/Typewriter';
+import Typewriter from '../components/Typewriter'; // Typewriter is now a Client Component
 
 import styles from '../styles/Home.module.css';
 
 let msgs = ['HELLO.', 'I AM VENU.'];
 
-const Home = () => {
+// Define metadata for this page
+export const metadata = {
+  title: 'Home | Kulkarni Venugopal',
+  description: "Kulkarni Venugopal's Personal Website",
+};
+
+// This is now a Server Component by default
+const HomePage = () => {
     // TODO: Update all dependencies
     // TODO: Insert a profile photo.
     // TODO: Update description to reflect my current place and interests
     // TODO: Random dynamic elements like bits that fly off near the cursor.
     return (
         <div>
-            <Head>
-                <title>Home | Kulkarni Venugopal</title>
-                <meta
-                    name='description'
-                    content="Kulkarni Venugopal's Personal Website"
-                />
-                <link rel='icon' href='/favicon.ico' />
-            </Head>
-
+            {/* Head component is removed */}
             <div className={styles.landing}>
+                {/* Typewriter is a Client Component, works fine here */}
                 <Typewriter messages={msgs} />
             </div>
             <div className={`${styles.para} ${styles.section1}`}>
@@ -69,4 +69,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default HomePage;

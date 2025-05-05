@@ -1,16 +1,18 @@
-// React component for the header of the application
+"use client";
+
 import styles from '../styles/components/Header.module.css';
-
 import React from 'react';
+import { useNav } from '../context/NavContext';
 
-const Header = ({ heading, navOpen }) => {
+const Header = ({ heading }) => {
+    const { navOpen } = useNav();
+    
     return (
         <div>
-            <div
-                className={`${styles['header']} ${styles['sticky']} ${
-                    navOpen === 'open' ? styles.low : null
-                }`}
-            >
+            {/* Restored the className logic dependent on navOpen */}
+            <div className={`${styles['header']} ${styles['sticky']} ${
+                navOpen === 'open' ? styles.low : null
+            }`}>
                 <h1 className={styles['title']}>{heading}</h1>
             </div>
 

@@ -1,3 +1,5 @@
+"use client"; // Add this directive because the component uses hooks (useState, useEffect)
+
 import styles from '../styles/components/Typewriter.module.css';
 
 import React, { useState, useEffect } from 'react';

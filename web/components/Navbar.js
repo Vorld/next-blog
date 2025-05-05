@@ -1,7 +1,10 @@
+"use client"; // Add this directive because the component uses hooks (useState, useEffect) and event handlers (onClick)
+
 import styles from '../styles/components/Navbar.module.css';
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { NavProvider, useNav } from '../context/NavContext';
 
 //debouncing function for scroll
 const debounce = (func, wait, immediate) => {
@@ -20,18 +23,13 @@ const debounce = (func, wait, immediate) => {
     };
 };
 
-// TODO: Make the button better and more obvious.
-const Navbar = (props) => {
-    //Navbar logic
-    const [navOpen, setOpen] = useState('close');
-
+// Internal component that uses the nav context
+const NavbarContent = (props) => {
+    const { navOpen, setNavOpen } = useNav();
+    
     //context
     const handleClick = () => {
-        if (navOpen === 'close') {
-            setOpen('open');
-        } else {
-            setOpen('close');
-        }
+        setNavOpen(navOpen === 'close' ? 'open' : 'close');
     };
 
     // hide button on scroll
@@ -62,25 +60,21 @@ const Navbar = (props) => {
             <nav className={`${styles[navOpen]} ${styles['main-nav']}`}>
                 <ul>
                     <li>
-                        {/* Updated Link: Removed nested <a> and onClick */}
                         <Link href='/' onClick={() => handleClick()} className={styles['nav-link']}>
                             HOME
                         </Link>
                     </li>
                     <li>
-                        {/* Updated Link: Removed nested <a> and onClick */}
                         <Link href='/photos' onClick={() => handleClick()} className={styles['nav-link']}>
                             PHOTOS
                         </Link>
                     </li>
                     <li>
-                        {/* Updated Link: Removed nested <a> and onClick */}
                         <Link href='/music' onClick={() => handleClick()} className={styles['nav-link']}>
                             MUSIC
                         </Link>
                     </li>
                     <li>
-                        {/* Updated Link: Removed nested <a> and onClick */}
                         <Link href='/blog' onClick={() => handleClick()} className={styles['nav-link']}>
                             BLOG
                         </Link>
@@ -107,11 +101,18 @@ const Navbar = (props) => {
                     navOpen === 'open' ? styles.low : null
                 }`}
             >
-                {React.cloneElement(props.children, {
-                    navOpen: navOpen,
-                })}
+                {props.children}
             </div>
         </div>
+    );
+};
+
+// Main Navbar component that wraps the content with the NavProvider
+const Navbar = (props) => {
+    return (
+        <NavProvider>
+            <NavbarContent {...props} />
+        </NavProvider>
     );
 };
 
