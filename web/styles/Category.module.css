@@ -89,7 +89,7 @@
     color: #e0e0e0;
     transition: all 0.5s;
     position: relative;
-
+    display: inline-block; /* Added to contain the element better */
     line-height: 50px;
     height: 50px;
     text-align: center;
@@ -97,9 +97,17 @@
     cursor: pointer;
     text-decoration: none;
     margin-bottom: 20px;
-
     transition: transform 0.1s;
+    z-index: 10; /* Make sure this is different than navbar z-index */
 }
+
+/* Control the size of FontAwesome icon in the return button */
+/* .return svg {
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+    font-size: 1rem;
+} */
 
 .return::before {
     content: '';
@@ -110,7 +118,9 @@
     height: 100%;
     background-color: #e0e0e01a;
     transition: all 0.3s;
+    z-index: -1; /* Make sure pseudo-elements are behind the content */
 }
+
 .return::after {
     content: '';
     position: absolute;
@@ -122,6 +132,7 @@
     transition: all 0.3s;
     border: 1px solid #e0e0e080;
     transform: scale(1.2, 1.2);
+    z-index: -1; /* Make sure pseudo-elements are behind the content */
 }
 
 .return:active {

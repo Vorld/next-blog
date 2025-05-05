@@ -1,6 +1,6 @@
 import '../styles/globals.css';
 import Navbar from '../components/Navbar';
-// Removed Head import, use metadata API or direct <head> tags
+import '@fortawesome/fontawesome-svg-core/styles.css'
 
 export const metadata = {
   title: 'Kulkarni Venugopal', // Default title

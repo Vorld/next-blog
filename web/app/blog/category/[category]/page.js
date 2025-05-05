@@ -2,7 +2,7 @@ import groq from 'groq';
 import client from '../../../../client';
 import Link from 'next/link';
 import Header from '../../../../components/Header';
-import PostPreviewList from '../../../../components/PostPreviewList'; // Import the new client component
+import PostPreviewList from '../../../../components/PostPreviewList'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import styles from '../../../../styles/Category.module.css';
@@ -22,7 +22,7 @@ async function getCategoryPosts(category) {
             publishedAt,
             slug,
             "categories": categories[] -> {title, slug},
-            body, // Keep body if needed, otherwise remove
+            body, 
         } | order(publishedAt desc)`,
         {
             category,
@@ -51,13 +51,19 @@ export async function generateMetadata({ params: { category } }) {
 // Page component (Server Component)
 const BlogCategoryPage = async ({ params }) => {
     const { category } = params; // Destructuring here is fine
+    
+    // Check if category exists in the database
+    const categoryExists = await client.fetch(
+        groq`count(*[_type == "category" && slug.current == $category]) > 0`, 
+        { category }
+    );
+    
+    // Show 404 page if category doesn't exist
+    if (!categoryExists) {
+        notFound();
+    }
+    
     const posts = await getCategoryPosts(category);
-
-    // Optional: Check if category exists or if posts array is empty and show notFound
-    // const categoryExists = await client.fetch(groq`count(*[_type == "category" && slug.current == $category]) > 0`, { category });
-    // if (!categoryExists || posts.length === 0) {
-    //     notFound();
-    // }
 
     return (
         <div>
@@ -68,12 +74,11 @@ const BlogCategoryPage = async ({ params }) => {
                     Filtering for &quot;{category}&quot;
                 </h3>
                 <Link href='/blog' className={styles.return}>
-                    <FontAwesomeIcon icon={faAngleLeft} />
+                    <FontAwesomeIcon icon={faAngleLeft} size="s"/>
                     {' Back to all'}
                 </Link>
             </div>
 
-            {/* Render the client component to display the list */}
             <PostPreviewList posts={posts} />
         </div>
     );
