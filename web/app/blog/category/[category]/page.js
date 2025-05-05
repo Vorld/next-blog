@@ -41,7 +41,9 @@ export async function generateStaticParams() {
 
 // Generate metadata for the page
 // Destructure category directly from params
-export async function generateMetadata({ params: { category } }) {
+export async function generateMetadata({ params }) {
+    const { category } = await params;
+
     // Optionally fetch category details if needed for metadata
     return {
         title: `Blog - ${category} | Kulkarni Venugopal`, // Use destructured category
@@ -50,7 +52,7 @@ export async function generateMetadata({ params: { category } }) {
 
 // Page component (Server Component)
 const BlogCategoryPage = async ({ params }) => {
-    const { category } = params; // Destructuring here is fine
+    const { category } = await params; 
     
     // Check if category exists in the database
     const categoryExists = await client.fetch(

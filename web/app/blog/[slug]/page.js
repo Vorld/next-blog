@@ -30,9 +30,10 @@ export async function generateStaticParams() {
 }
 
 // Generate metadata for the page
-// Standard access: { params }
 export async function generateMetadata({ params }) {
-    const post = await getPost(params.slug); // Direct access
+    const { slug } = await params;
+
+    const post = await getPost(slug);
     if (!post) {
         return { title: 'Not Found' };
     }
@@ -42,9 +43,10 @@ export async function generateMetadata({ params }) {
 }
 
 // Page component (Server Component)
-// Standard access: { params }
 const PostPage = async ({ params }) => {
-    const post = await getPost(params.slug); // Direct access
+    const { slug } = await params;
+
+    const post = await getPost(slug);
 
     if (!post) {
         notFound();
