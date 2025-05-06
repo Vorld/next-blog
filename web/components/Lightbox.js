@@ -9,6 +9,7 @@ const Lightbox = ({ images, initialIndex, onClose }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [swipeDirection, setSwipeDirection] = useState(null); // 'left', 'right', or null
     const [isTransitioning, setIsTransitioning] = useState(false);
+    const [entranceDirection, setEntranceDirection] = useState(null); // 'left', 'right', or null
     
     // Touch swipe state
     const touchStartX = useRef(0);
@@ -16,26 +17,28 @@ const Lightbox = ({ images, initialIndex, onClose }) => {
     const touchStartY = useRef(0);
     const touchEndY = useRef(0);
     const minSwipeDistance = 50; // Minimum distance required for a swipe
-    const imageContainerRef = useRef(null);
+    const modalRef = useRef(null);
 
     // --- Navigation ---
     const goToPrevious = useCallback(() => {
         if (isTransitioning) return;
         
         setSwipeDirection('right');
+        setEntranceDirection('left');
         setIsTransitioning(true);
         setIsLoading(true);
         
-        // Small delay to allow animation to start
+        // Small delay to allow exit animation to start
         setTimeout(() => {
             setCurrentIndex((prevIndex) =>
                 prevIndex === 0 ? images.length - 1 : prevIndex - 1
             );
         }, 150);
         
-        // Reset transition states
+        // Reset transition states after both animations complete
         setTimeout(() => {
             setSwipeDirection(null);
+            setEntranceDirection(null);
             setIsTransitioning(false);
         }, 300);
     }, [images.length, isTransitioning]);
@@ -44,19 +47,21 @@ const Lightbox = ({ images, initialIndex, onClose }) => {
         if (isTransitioning) return;
         
         setSwipeDirection('left');
+        setEntranceDirection('right');
         setIsTransitioning(true);
         setIsLoading(true);
         
-        // Small delay to allow animation to start
+        // Small delay to allow exit animation to start
         setTimeout(() => {
             setCurrentIndex((prevIndex) =>
                 prevIndex === images.length - 1 ? 0 : prevIndex + 1
             );
         }, 150);
         
-        // Reset transition states
+        // Reset transition states after both animations complete
         setTimeout(() => {
             setSwipeDirection(null);
+            setEntranceDirection(null);
             setIsTransitioning(false);
         }, 300);
     }, [images.length, isTransitioning]);
@@ -78,11 +83,11 @@ const Lightbox = ({ images, initialIndex, onClose }) => {
         const verticalDist = Math.abs(touchStartY.current - touchEndY.current);
         
         // Only provide feedback if predominantly horizontal movement
-        if (Math.abs(horizontalDist) > verticalDist && imageContainerRef.current) {
-            // Move the image container slightly in the direction of the swipe (limited movement)
-            const maxTranslate = 40; // Max pixels to translate
-            const translate = Math.min(Math.abs(horizontalDist) / 3, maxTranslate) * (horizontalDist > 0 ? -1 : 1);
-            imageContainerRef.current.style.transform = `translateX(${translate}px)`;
+        if (Math.abs(horizontalDist) > verticalDist && modalRef.current) {
+            // Move the modal slightly in the direction of the swipe (limited movement)
+            const maxTranslate = 25; // Max pixels to translate
+            const translate = Math.min(Math.abs(horizontalDist) / 4, maxTranslate) * (horizontalDist > 0 ? -1 : 1);
+            modalRef.current.style.transform = `translateX(${translate}px)`;
         }
     };
 
@@ -90,8 +95,8 @@ const Lightbox = ({ images, initialIndex, onClose }) => {
         if (isTransitioning) return;
         
         // Reset any translation applied during touch move
-        if (imageContainerRef.current) {
-            imageContainerRef.current.style.transform = '';
+        if (modalRef.current) {
+            modalRef.current.style.transform = '';
         }
         
         // Calculate horizontal and vertical distance
@@ -151,27 +156,53 @@ const Lightbox = ({ images, initialIndex, onClose }) => {
     const originalWidth = currentImage.dimensions?.width || 1200;
     const originalHeight = currentImage.dimensions?.height || 800;
     
-    // Dynamic classes for animation
-    const imageContainerClasses = `${styles.imageContainer} ${
-        swipeDirection === 'left' ? styles.swipeLeft : 
-        swipeDirection === 'right' ? styles.swipeRight : ''
+    // Dynamic classes for modal animation
+    const modalClasses = `${styles.modal} ${
+        swipeDirection === 'left' ? styles.modalSwipeLeft : 
+        swipeDirection === 'right' ? styles.modalSwipeRight : 
+        entranceDirection === 'right' ? styles.modalSlideFromRight :
+        entranceDirection === 'left' ? styles.modalSlideFromLeft : ''
     }`;
+
+    // Keep navigation buttons outside the modal component
+    const navigationButtons = images && images.length > 1 && !isMobile && (
+        <>
+            <button 
+                className={`${styles.navButton} ${styles.prevButton}`} 
+                onClick={(e) => {
+                    e.stopPropagation(); // Prevent click from reaching the overlay
+                    goToPrevious();
+                }}
+                style={{ opacity: isTransitioning ? 0.5 : 1 }}
+            >&#10094;</button>
+            <button 
+                className={`${styles.navButton} ${styles.nextButton}`} 
+                onClick={(e) => {
+                    e.stopPropagation(); // Prevent click from reaching the overlay
+                    goToNext();
+                }}
+                style={{ opacity: isTransitioning ? 0.5 : 1 }}
+            >&#10095;</button>
+        </>
+    );
 
     return (
         <div className={styles.overlay} onClick={onClose}>
-            <button className={styles.closeButton} onClick={onClose}>&times;</button>
+            <button 
+                className={styles.closeButton} 
+                onClick={onClose}
+                style={{ opacity: isTransitioning ? 0.5 : 1 }}
+            >&times;</button>
             
             <div 
-                className={styles.modal} 
+                ref={modalRef}
+                className={modalClasses} 
                 onClick={(e) => e.stopPropagation()}
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}
                 onTouchEnd={handleTouchEnd}
             >
-                <div 
-                    ref={imageContainerRef}
-                    className={imageContainerClasses}
-                >
+                <div className={styles.imageContainer}>
                     {isLoading && (
                         <div className={styles.imagePlaceholder} 
                              style={{ 
@@ -202,19 +233,14 @@ const Lightbox = ({ images, initialIndex, onClose }) => {
                     <div className={styles.caption}>{currentImage.caption}</div>
                 )}
 
-                {/* {isMobile && images.length > 1 && (
+                {isMobile && images.length > 1 && (
                     <div className={styles.swipeIndicator}>
                         <span className={styles.swipeDot}></span>
                     </div>
-                )} */}
-
-                {images.length > 1 && !isMobile && (
-                    <>
-                        <button className={`${styles.navButton} ${styles.prevButton}`} onClick={goToPrevious}>&#10094;</button>
-                        <button className={`${styles.navButton} ${styles.nextButton}`} onClick={goToNext}>&#10095;</button>
-                    </>
                 )}
             </div>
+        
+            {navigationButtons}
         </div>
     );
 };
