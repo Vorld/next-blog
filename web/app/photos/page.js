@@ -1,7 +1,8 @@
 import groq from 'groq';
 import client from '../../client';
-import Image from 'next/image';
 import Header from '../../components/Header';
+import PhotoGallery from '../../components/PhotoGallery'; // Import the new component
+// Keep styles import if PhotoGallery uses them, otherwise remove
 import styles from '../../styles/Photos.module.css';
 
 // Fetch data at the server level
@@ -10,6 +11,7 @@ async function getImages() {
         "images": images[]{
             "id": _key,
             "alt": asset->alt,
+            "caption": caption,
             "url": asset->url,
             "dimensions": asset->metadata.dimensions
         }
@@ -32,30 +34,7 @@ const PhotosPage = async () => {
     return (
         <div>
             <Header heading={'PHOTOS'} />
-            <div className={styles.container}>
-                {images.map((image) => {
-                    // Basic check for essential data
-                    if (!image?.url || !image?.dimensions) return null;
-                    return (
-                        <div 
-                            key={image.id} 
-                            className={styles.imageWrapper}
-                        >
-                            <Image
-                                src={image.url}
-                                alt={image.alt || "Gallery image"}
-                                className={styles.image}
-                                width={image.dimensions.width}
-                                height={image.dimensions.height}
-                                // Consider adjusting sizes based on your layout
-                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                quality={75} // Default is 75, adjust as needed
-                                priority={false} // Set to true for above-the-fold images if needed
-                            />
-                        </div>
-                    );
-                })}
-            </div>
+            <PhotoGallery images={images} />
         </div>
     );
 };
