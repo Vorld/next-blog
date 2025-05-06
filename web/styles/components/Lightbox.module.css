@@ -1,0 +1,322 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.85); /* Darker overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it's above other content */
+    padding: 20px;
+    box-sizing: border-box;
+    cursor: pointer; /* Indicate clicking overlay closes it */
+}
+
+.modal {
+    position: relative;
+    background-color: #1a1a1a; /* Dark background for the modal */
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 90vw; /* Limit width to 90% of viewport width */
+    max-height: 90vh; /* Limit height */
+    width: auto; /* Allow content to determine width up to max-width */
+    display: flex; /* Use flexbox */
+    flex-direction: column; /* Stack image and caption vertically */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    cursor: default; /* Reset cursor for modal content */
+    overflow: hidden; /* Prevent content spill if something unexpected happens */
+    touch-action: pan-y; /* Allow vertical scrolling but capture horizontal swipes */
+    transition: transform 0.2s ease; /* Smooth transition for touch feedback */
+}
+
+.imageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-height: 75vh; /* Define the max height for the image area */
+    margin-bottom: 15px;
+    overflow: hidden; /* Hide potential overflow */
+    position: relative;
+    transition: transform 0.3s ease; /* Smooth transition for swipe feedback */
+}
+
+/* Placeholder while image is loading */
+.imagePlaceholder {
+    background-color: #2a2a2a;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 75vh;
+    max-height: 75vh;
+}
+
+/* Loading animation */
+.loader {
+    border: 5px solid #3a3a3a;
+    border-radius: 50%;
+    border-top: 5px solid #888;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.imageContainer img {
+    object-fit: contain; /* Ensure the entire image is visible */
+    max-width: 100%; /* Respect container width */
+    max-height: 75vh; /* Control the height */
+}
+
+.caption {
+    color: #ccc;
+    text-align: center;
+    font-size: 0.9em;
+    max-height: 10vh; /* Limit caption height */
+    overflow-y: auto; /* Allow scrolling for long captions */
+}
+
+.closeButton {
+    position: fixed; /* Changed from absolute to fixed */
+    top: 40px;
+    right: 40px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2.5rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1010;
+    transition: all 0.5s;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.closeButton::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #e0e0e01a;
+    transition: all 0.3s;
+}
+
+.closeButton::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: all 0.3s;
+    border: 1px solid #e0e0e080;
+    transform: scale(1.2, 1.2);
+}
+
+.closeButton:hover::before {
+    opacity: 0;
+    transform: scale(0.5, 0.5);
+}
+
+.closeButton:hover::after {
+    opacity: 1;
+    transform: scale(1, 1);
+}
+
+.closeButton:active {
+    transform: scale(0.95);
+}
+
+/* Navigation buttons styled similar to blog post navigation */
+.navButton {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #e0e0e0;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 1010;
+    transition: all 0.5s;
+    line-height: 50px;
+    height: 60px;
+    width: 60px;
+    text-align: center;
+    user-select: none;
+    padding: 0;
+}
+
+.navButton::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #e0e0e01a;
+    transition: all 0.3s;
+    /* border-radius: 50%; */
+}
+
+.navButton::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: all 0.3s;
+    border: 1px solid #e0e0e080;
+    transform: scale(1.2, 1.2);
+    /* border-radius: 50%; */
+}
+
+.navButton:hover::before {
+    opacity: 0;
+    transform: scale(0.5, 0.5);
+}
+
+.navButton:hover::after {
+    opacity: 1;
+    transform: scale(1, 1);
+}
+
+.navButton:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+.prevButton {
+    left: 5%;
+}
+
+.nextButton {
+    right: 5%;
+}
+
+/* Add swipe transition classes */
+.swipeLeft {
+    animation: slideToLeft 0.3s ease-out;
+}
+
+.swipeRight {
+    animation: slideToRight 0.3s ease-out;
+}
+
+/* Animation for swipe transitions */
+@keyframes slideToLeft {
+    0% { transform: translateX(0); opacity: 1; }
+    100% { transform: translateX(-30px); opacity: 0; }
+}
+
+@keyframes slideToRight {
+    0% { transform: translateX(0); opacity: 1; }
+    100% { transform: translateX(30px); opacity: 0; }
+}
+
+@keyframes slideFromRight {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+}
+
+@keyframes slideFromLeft {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+}
+
+/* Swipe indicator styles for mobile */
+.swipeIndicator {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    position: relative;
+}
+
+/* Add modal transition classes */
+.modalSwipeLeft {
+    animation: modalSlideToLeft 0.3s ease-out;
+}
+
+.modalSwipeRight {
+    animation: modalSlideToRight 0.3s ease-out;
+}
+
+.modalSlideFromRight {
+    animation: modalSlideFromRight 0.3s ease-out;
+}
+
+.modalSlideFromLeft {
+    animation: modalSlideFromLeft 0.3s ease-out;
+}
+
+/* Animation for modal transitions */
+@keyframes modalSlideToLeft {
+    0% { transform: translateX(0); opacity: 1; }
+    100% { transform: translateX(-50px); opacity: 0; }
+}
+
+@keyframes modalSlideToRight {
+    0% { transform: translateX(0); opacity: 1; }
+    100% { transform: translateX(50px); opacity: 0; }
+}
+
+@keyframes modalSlideFromRight {
+    from { transform: translateX(50px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes modalSlideFromLeft {
+    from { transform: translateX(-50px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .modal {
+        padding: 15px;
+        max-width: 95vw;
+        max-height: 95vh;
+    }
+    .imageContainer {
+        max-height: 70vh;
+    }
+    .imageContainer img {
+        max-height: 70vh;
+    }
+    .closeButton {
+        font-size: 2rem;
+        top: 5px;
+        right: 10px;
+    }
+    /* Hide navigation buttons on mobile */
+    .navButton {
+        display: none;
+    }
+    .prevButton {
+        left: 10px;
+    }
+    .nextButton {
+        right: 10px;
+    }
+
+    .imagePlaceholder {
+        min-width: 95vw; 
+        min-height: 30vh; /* Overridden: was 75vh. Other properties inherited. Removed redundant min-width. */
+    }
+}
