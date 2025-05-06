@@ -32,15 +32,18 @@ export default {
     preview: {
         select: {
             images: 'images',
-            image: 'images.0',
+            image: 'images.1' 
         },
         prepare(selection) {
             const { images, image } = selection;
-
+            
+            // Count the number of properties in the images object
+            const imageCount = images ? Object.keys(images).length : 0;
+            
             return {
-                title: `Gallery block of ${Object.keys(images).length} images`,
-                caption: `Caption: ${image.caption}`,
-                media: image,
+                title: `Gallery block of ${imageCount} images`,
+                subtitle: image?.caption || 'No caption',
+                media: image
             };
         },
     },

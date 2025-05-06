@@ -1,7 +1,9 @@
+"use client"; // Add this directive because the component uses useEffect and interacts with the DOM
+
 import React, { useEffect } from 'react';
-import ViewSDKClient from '../../components/PDFViewer/ViewSDKClient';
+import ViewSDKClient from './ViewSDKClient'; // Adjusted import path
 import Script from 'next/script';
-import styles from '../../styles/components/PDFViewer.module.css';
+import styles from '../../styles/components/PDFViewer.module.css'; // Corrected path
 
 const PDFViewer = ({ url, id }) => {
     useEffect(() => {
@@ -18,7 +20,8 @@ const PDFViewer = ({ url, id }) => {
 
     return (
         <div>
-            <Script src='https://documentcloud.adobe.com/view-sdk/main.js'></Script>
+            {/* Script component needs to be handled carefully in App Router, ensure it loads correctly */}
+            <Script src='https://documentcloud.adobe.com/view-sdk/main.js' strategy="lazyOnload"></Script>
             <div id={id} className={styles.pdfViewer} />
         </div>
     );
