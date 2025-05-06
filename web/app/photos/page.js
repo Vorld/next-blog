@@ -1,9 +1,7 @@
 import groq from 'groq';
 import client from '../../client';
 import Header from '../../components/Header';
-import PhotoGallery from '../../components/PhotoGallery'; // Import the new component
-// Keep styles import if PhotoGallery uses them, otherwise remove
-import styles from '../../styles/Photos.module.css';
+import PhotoGallery from '../../components/PhotoGallery'; 
 
 // Fetch data at the server level
 async function getImages() {

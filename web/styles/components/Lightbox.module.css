@@ -316,14 +316,7 @@
     }
 
     .imagePlaceholder {
-        background-color: #2a2a2a;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 30vh;
-        min-width: 95vw;
+        min-width: 95vw; 
+        min-height: 30vh; /* Overridden: was 75vh. Other properties inherited. Removed redundant min-width. */
     }
-    
-    
 }

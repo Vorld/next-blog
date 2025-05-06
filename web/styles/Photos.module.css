@@ -16,14 +16,15 @@
     position: relative;
     pointer-events: auto;
     transition: all 0.3s;
+    cursor: pointer; /* Added cursor pointer */
 }
 
 /* Maintain the styling for the image itself */
 .image {
     max-height: 45vh;
-    width: auto !important;
-    height: auto !important;
-    object-fit: contain !important;
+    width: auto; 
+    height: auto;
+    object-fit: contain !important; /* Kept !important for now, critical for display */
 }
 
 @media only screen and (min-width: 767px) {
@@ -32,10 +33,6 @@
         width: auto;
         display: flex;
         justify-content: center;
-    }
-    
-    .image {
-        max-height: 45vh !important;
     }
     
     .container:hover .imageWrapper {
@@ -63,9 +60,9 @@
     }
     
     .image {
-        width: 90vw !important;
-        max-width: 90vw !important;
-        height: auto !important;
-        object-fit: contain !important;
+        width: 90vw; /* Removed !important */
+        /* max-width: 90vw !important; Removed as redundant with width: 90vw */
+        height: auto; /* Removed !important */
+        object-fit: contain !important; /* Kept !important for now */
     }
 }

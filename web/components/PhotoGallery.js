@@ -36,7 +36,6 @@ const PhotoGallery = ({ images }) => {
                             key={image.id}
                             className={styles.imageWrapper}
                             onClick={() => handleImageClick(index)}
-                            style={{ cursor: 'pointer' }} // Add pointer cursor to indicate clickability
                         >
                             <Image
                                 src={image.url}
