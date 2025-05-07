@@ -1,12 +1,12 @@
 //Components
-// Removed Head import, use metadata in layout or page
+
 import Image from 'next/image'; // Keep Image if used
 import Link from 'next/link';
-import Typewriter from '../components/Typewriter'; // Typewriter is now a Client Component
+import Typewriter from '../components/Typewriter'; 
 
 import styles from '../styles/Home.module.css';
 
-let msgs = ['HELLO.', 'I AM VENU.'];
+let msgs = ['HELLO.', 'THIS IS VENU.'];
 
 // Define metadata for this page
 export const metadata = {
@@ -14,18 +14,32 @@ export const metadata = {
   description: "Kulkarni Venugopal's Personal Website",
 };
 
-// This is now a Server Component by default
 const HomePage = () => {
-    // TODO: Update all dependencies
     // TODO: Insert a profile photo.
     // TODO: Update description to reflect my current place and interests
     // TODO: Random dynamic elements like bits that fly off near the cursor.
     return (
         <div>
-            {/* Head component is removed */}
             <div className={styles.landing}>
-                {/* Typewriter is a Client Component, works fine here */}
-                <Typewriter messages={msgs} />
+                <Typewriter 
+                    messages={msgs} 
+                    fontSize="4.5rem"
+                    fontWeight="lighter"
+                    cursorColor="#e0e0e0"
+                />
+                <Typewriter 
+                    messages={["Code Monkey.", "Laughs at his own jokes.", "Makes onions cry.", "Does not copy Minecraft.", "Judges book covers.", "Reinventor of the wheel.", "Avoids the plague.", "Lives for the plot.", "Do you like rhetorical questions?", "Goal Disoriented Person.", "Uses 'literally' figuratively.", "Has a favorite spoon.", "Yes, this is an infinite loop.", "Thinks coffee is soup."]} 
+                    loop
+                    startDelay={8000}
+                    typeSpeed={150}
+                    delayAfterType={3000}
+                    delayAfterDelete={800}
+                    fontSize="2rem"
+                    textColor="#555"
+                    tag="div"
+                    random
+                />
+               
             </div>
             <div className={`${styles.para} ${styles.section1}`}>
                 <h2 className={styles.header}>ME</h2>
