@@ -69,11 +69,11 @@ const NavbarContent = (props) => {
                             PHOTOS
                         </Link>
                     </li>
-                    <li>
+                    {/* <li>
                         <Link href='/music' onClick={() => handleClick()} className={styles['nav-link']}>
                             MUSIC
                         </Link>
-                    </li>
+                    </li> */}
                     <li>
                         <Link href='/blog' onClick={() => handleClick()} className={styles['nav-link']}>
                             BLOG
