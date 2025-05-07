@@ -29,6 +29,7 @@ const HomePage = () => {
                     fontSize="4.5rem"
                     fontWeight="lighter"
                     cursorColor="#e0e0e0"
+                    typeSpeed={200}
                 />
                 <Typewriter 
                     messages={["Code Monkey.", "Laughs at his own jokes.", "Makes onions cry.", "Does not copy Minecraft.", "Judges book covers.", "Reinventor of the wheel.", "Avoids the plague.", "Lives for the plot.", "Do you like rhetorical questions?", "Goal Disoriented Person.", "Uses 'literally' figuratively.", "Has a favorite spoon.", "Yes, this is an infinite loop.", "Thinks coffee is soup.", "Serial Monotasker.","I can't go on. I'll go on."]} 
@@ -47,7 +48,7 @@ const HomePage = () => {
             <div className={`${styles.para} ${styles.section1}`}>
                 <h2 className={styles.header}>ME</h2>
                 <p>
-                    Hey! I'm Kulkarni <b>Venu</b>gopal.
+                    Hey! I&apos;m Kulkarni <b>Venu</b>gopal.
 
                     I do things mostly for no good reason at all but the joy of doing it.
                 </p>
