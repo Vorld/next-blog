@@ -6,6 +6,9 @@ import Typewriter from '../components/Typewriter';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faLinkedin, faTelegram } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import groq from 'groq';
+import client from '../client';
+import imageUrlBuilder from '@sanity/image-url';
 
 import styles from '../styles/Home.module.css';
 
@@ -17,10 +20,16 @@ export const metadata = {
   description: "Kulkarni Venugopal's Personal Website",
 };
 
-const HomePage = () => {
-    // TODO: Insert a profile photo.
-    // TODO: Update description to reflect my current place and interests
-    // TODO: Random dynamic elements like bits that fly off near the cursor.
+function urlFor(source) {
+    return imageUrlBuilder(client).image(source);
+}
+
+const HomePage = async () => {
+    // Fetch author with image from Sanity
+    const author = await client.fetch(groq`*[_type == "author"][0]{
+        name,
+        image
+    }`);
     return (
         <div>
             <div className={styles.landing}>
@@ -43,31 +52,52 @@ const HomePage = () => {
                     tag="div"
                     random
                 />
-               
             </div>
             <div className={`${styles.para} ${styles.section1}`}>
-                <h2 className={styles.header}>ME</h2>
-                <p>
-                    Hey! I&apos;m Kulkarni <b>Venu</b>gopal.
-
-                    I do things mostly for no good reason at all but the joy of doing it.
-                </p>
-                <p>
-
-                </p>
+                <div className={styles.authorProfile}>
+                    {author?.image && (
+                        <div className={styles.authorImageWrapper}>
+                            <Image
+                                src={urlFor(author.image).fit('crop').url()}
+                                alt={author.name || 'Author profile photo'}
+                                width={400}
+                                height={500}
+                                className={styles.authorImage}
+                                priority
+                            />
+                        </div>
+                    )}
+                    <div className={styles.authorText}>
+                        <h2 className={styles.header}>ME</h2>
+                        <p>
+                            Hey! I&apos;m Kulkarni <b>Venu</b>gopal.
+                        </p>
+                        <p>
+                            Born during the Venus transit of 2004, I've been orbiting between the technical and creative ever since. 
+                        </p>
+                        <p>
+                        After emerging in a little town called Kalaburagi (literal translation: Land of Rocks and Thorns) in Karnataka, India, I was promptly whisked to Singapore, where I spent the first fifteen years of my life. In 2019, I moved to Chennai, where I graduated high school before returning to Singapore for National Service.
+                        </p>
+                        <p>
+                        Currently, I'm pursuing Computer Science and liberal arts(ish) at the National University of Singapore while part of the NUS College programme (Class of '28).
+                        </p>
+                    </div>
+                </div>
             </div>
             <div className={`${styles.para} ${styles.section2}`}>
                 <h2 className={styles.header}>ABOUT THIS WEBSITE</h2>
                 <p>
-                    This website was built with <Link href='https://nextjs.org/' className={styles.emailLink}>Next.js</Link>, integrated with the <Link className={styles.emailLink} href="https://www.sanity.io/">Sanity</Link> headless content management system. 
+                    This website was built with <Link href='https://nextjs.org/' className={styles.emailLink}>Next.js</Link>, integrated with the <Link className={styles.emailLink} href="https://www.sanity.io/">Sanity</Link> headless content management system and hosted on <Link className={styles.emailLink} href="https://www.vercel.com/">Vercel</Link>. 
                 </p>
-                <p>The navigation
-                    was inspired by the folks over at <Link href='https://www.hugeinc.com/' className={styles.emailLink}>Huge inc</Link>.</p>
+                <p>The navigation was inspired by the folks over at <Link href='https://www.hugeinc.com/' className={styles.emailLink}>Huge inc</Link>.</p>
+                <p>
+                    Checkout the <Link href='https://www.github.com/vorld/next-blog' className={styles.emailLink}>Github repository</Link>. 
+                </p>
             </div>
             <div className={`${styles.para} ${styles.section3}`}>
                 <h2 className={styles.header}>CONTACT ME</h2>
                 <p>
-                    I love a good story—so feel free to reach out and tell me yours (or ask a question, share a thought, or just say hi).
+                    I love a good story—so feel free to reach out and tell me yours (or ask a question, share a musing, or just say hi).
                 </p>
                 <div className={styles.socialIcons}>
                     <Link href="https://github.com/vorld" target="_blank" rel="noopener noreferrer" className={styles.socialIcon}>

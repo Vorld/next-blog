@@ -38,7 +38,7 @@
   letter-spacing: 0.01em;
 
   height: 100vh;
-  padding: 0% 25% 0% 25%;
+  padding: 0% 30% 0% 30%; /* TODO: Decide if I want to keep this 30% padding*/
 }
 
 .section1 {
@@ -67,10 +67,10 @@
   color: #7fb5ff;
 }
 
-/* Social media icon styles */
+
 .socialIcons {
   display: flex;
-  justify-content: flex-start; /* Changed from center to flex-start for left alignment */
+  justify-content: flex-start; 
   gap: 1.5rem;
   margin-top: 2rem;
 }
@@ -167,6 +167,32 @@
   border-color: #26a5e4;
 }
 
+.authorProfile {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.authorImageWrapper {
+  flex-shrink: 0;
+  /* Ensures the image stays rectangular and doesn't shrink */
+  display: flex;
+  align-items: flex-start;
+}
+
+.authorImage {
+  object-fit: cover;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+  background: #222;
+}
+
+.authorText {
+  flex: 1;
+  min-width: 0;
+}
+
 @media only screen and (max-width: 767px) {
   .para {
     letter-spacing: 0.005em;
@@ -180,5 +206,24 @@
   .socialIcon {
     width: 45px;
     height: 45px;
+  }
+
+  .authorProfile {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+  }
+  
+  .authorImageWrapper {
+    display: none; /* Hide the author image on small screens */
+  }
+  
+  .authorImage {
+    width: 70vw;
+    height: 38vw;
+  }
+  
+  .authorText {
+    width: 100%;
   }
 }
