@@ -194,25 +194,9 @@
 }
 
 @media only screen and (max-width: 767px) {
-  .landing, .para {
-    /* Use min-height instead of fixed height to prevent overflow issues */
-    min-height: 100vh;
-    height: auto;
-    /* Fix for mobile browsers with changing UI elements */
-    min-height: -webkit-fill-available;
-  }
-  
   .para {
     letter-spacing: 0.005em;
     padding: 0% 10% 0% 10%;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-  }
-  
-  /* Ensure first section doesn't appear taller on initial load */
-  .section1 {
-    margin-top: 0;
-    position: relative;
   }
   
   .socialIcons {
@@ -231,7 +215,7 @@
   }
   
   .authorImageWrapper {
-    display: none; /* Hide the author image on small screens */
+    display: none; 
   }
   
   .authorImage {
