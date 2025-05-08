@@ -1,6 +1,8 @@
 .title {
+    /* Default styles that can be overridden via props */
     font-size: 4.5rem;
     font-weight: lighter;
+    /* Always applied styles */
     cursor: default;
     user-select: none;
     -ms-user-select: none;
@@ -8,8 +10,29 @@
     animation: fadein 1s;
 }
 
+.centered {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.typewriterContainer {
+    display: inline-block;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    text-align: center;
+}
+
 .cursor {
+    /* Default style that can be overridden */
     border-left: 0.02em solid #e0e0e0;
+    /* The solid style needs to be maintained */
+    border-left-style: solid;
+}
+
+.blinking {
     animation: blink 0.7s steps(1) infinite;
 }
 
@@ -17,6 +40,11 @@
     50% {
         border-color: transparent;
     }
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
 
 @media only screen and (max-width: 767px) {

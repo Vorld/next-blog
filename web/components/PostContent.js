@@ -1,7 +1,6 @@
 "use client"; // PortableText needs to be a client component if using custom client components like Latex or PDFViewer
 
 import styles from '../styles/Post.module.css'; // Corrected path
-import groq from 'groq';
 import client from '../client'; // Corrected path
 import imageUrlBuilder from '@sanity/image-url';
 import { PortableText as ReactPortableText } from '@portabletext/react'; // Rename to avoid conflict

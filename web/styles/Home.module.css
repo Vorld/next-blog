@@ -38,7 +38,7 @@
   letter-spacing: 0.01em;
 
   height: 100vh;
-  padding: 0% 25% 0% 25%;
+  padding: 0% 30% 0% 30%; /* TODO: Decide if I want to keep this 30% padding*/
 }
 
 .section1 {
@@ -67,9 +67,163 @@
   color: #7fb5ff;
 }
 
+
+.socialIcons {
+  display: flex;
+  justify-content: flex-start; 
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.socialIcon {
+  color: #e0e0e0;
+  background-color: transparent;
+  border: 1px solid rgba(224, 224, 224, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.77, 0, 0.175, 1);
+  text-decoration: none;
+}
+
+.socialIcon::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-color: #e0e0e01a;
+  transition: all 0.3s;
+}
+
+.socialIcon::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0;
+  transition: all 0.3s;
+  border: 1.1px solid #e0e0e080;
+  transform: scale(1.2, 1.2);
+  pointer-events: none;
+  box-sizing: border-box;
+}
+
+.socialIcon:hover::after {
+  opacity: 1;
+  transform: scale(1, 1);
+}
+
+.socialIcon:hover::before {
+  opacity: 0;
+  transform: scale(0.5, 0.5);
+}
+
+.socialIcon:active {
+  transform: scale(0.95);
+}
+
+/* GitHub */
+.socialIcon:nth-child(1):hover {
+  background-color: rgba(51, 51, 51, 0.2);
+  border-color: #333;
+}
+.socialIcon:nth-child(1):hover::after {
+  border-color: #333;
+}
+
+/* LinkedIn */
+.socialIcon:nth-child(2):hover {
+  background-color: rgba(0, 119, 181, 0.2);
+  border-color: #0077b5;
+}
+.socialIcon:nth-child(2):hover::after {
+  border-color: #0077b5;
+}
+
+/* Email */
+.socialIcon:nth-child(3):hover {
+  background-color: rgba(234, 67, 53, 0.2);
+  border-color: #ea4335;
+}
+.socialIcon:nth-child(3):hover::after {
+  border-color: #ea4335;
+}
+
+/* Telegram */
+.socialIcon:nth-child(4):hover {
+  background-color: rgba(38, 165, 228, 0.2);
+  border-color: #26a5e4;
+}
+.socialIcon:nth-child(4):hover::after {
+  border-color: #26a5e4;
+}
+
+.authorProfile {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.authorImageWrapper {
+  flex-shrink: 0;
+  /* Ensures the image stays rectangular and doesn't shrink */
+  display: flex;
+  align-items: flex-start;
+}
+
+.authorImage {
+  object-fit: cover;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+  background: #222;
+}
+
+.authorText {
+  flex: 1;
+  min-width: 0;
+}
+
 @media only screen and (max-width: 767px) {
   .para {
     letter-spacing: 0.005em;
     padding: 0% 10% 0% 10%;
+  }
+  
+  .socialIcons {
+    gap: 1rem;
+  }
+  
+  .socialIcon {
+    width: 45px;
+    height: 45px;
+  }
+
+  .authorProfile {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+  }
+  
+  .authorImageWrapper {
+    display: none; /* Hide the author image on small screens */
+  }
+  
+  .authorImage {
+    width: 70vw;
+    height: 38vw;
+  }
+  
+  .authorText {
+    width: 100%;
   }
 }

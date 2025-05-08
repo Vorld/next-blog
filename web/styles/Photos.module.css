@@ -16,7 +16,7 @@
     position: relative;
     pointer-events: auto;
     transition: all 0.3s;
-    cursor: pointer; /* Added cursor pointer */
+    cursor: pointer; 
 }
 
 /* Maintain the styling for the image itself */
