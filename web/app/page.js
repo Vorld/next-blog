@@ -73,13 +73,13 @@ const HomePage = async () => {
                             Hey! I&apos;m Kulkarni <b>Venu</b>gopal.
                         </p>
                         <p>
-                            Born during the Venus transit of 2004, I've been orbiting between the technical and creative ever since. 
+                            Born during the Venus transit of 2004, I&apos;ve been orbiting between the technical and creative ever since. 
                         </p>
                         <p>
                         After emerging in a little town called Kalaburagi (literal translation: Land of Rocks and Thorns) in Karnataka, India, I was promptly whisked to Singapore, where I spent the first fifteen years of my life. In 2019, I moved to Chennai, where I graduated high school before returning to Singapore for National Service.
                         </p>
                         <p>
-                        Currently, I'm pursuing Computer Science and liberal arts(ish) at the National University of Singapore while part of the NUS College programme (Class of '28).
+                        Currently, I&apos;m pursuing Computer Science and liberal arts(ish) at the National University of Singapore while part of the NUS College programme (Class of &apos;28).
                         </p>
                     </div>
                 </div>
