@@ -79,6 +79,15 @@
     .main-nav ul li {
         padding: 5vh;
     }
+
+    .shifter {
+        /* Use transform for better performance on mobile */
+        transform: translateY(0);
+    }
+
+    .low {
+        transform: translateY(160px);
+    }
 }
 
 .menu-button {
@@ -318,10 +327,16 @@
     position: relative;
     background-color: #121212;
     transition: all 0.4s cubic-bezier(0.77, 0, 0.175, 1);
-
     top: 0px;
 }
 
 .low {
     top: 160px;
+}
+
+/* Pre-hydration style to prevent the unintended "open" state on mobile Chrome during initial load */
+.preHydration {
+    transition: none !important; /* Disable transition during initial load */
+    will-change: transform; /* Optimize for animation */
+    transform: translateZ(0); /* Force hardware acceleration */
 }

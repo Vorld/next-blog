@@ -10,6 +10,7 @@ const NavContext = createContext({
 
 // Provider component that wraps parts of the app that need the navigation state
 export const NavProvider = ({ children }) => {
+  // Initialize with 'close' state
   const [navOpen, setNavOpen] = useState('close');
   
   return (

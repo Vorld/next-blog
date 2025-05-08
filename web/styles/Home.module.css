@@ -215,7 +215,7 @@
   }
   
   .authorImageWrapper {
-    display: none; 
+    display: none; /* Hide the author image on small screens */
   }
   
   .authorImage {

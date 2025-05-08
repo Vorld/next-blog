@@ -26,6 +26,12 @@ const debounce = (func, wait, immediate) => {
 // Internal component that uses the nav context
 const NavbarContent = (props) => {
     const { navOpen, setNavOpen } = useNav();
+    const [hydrated, setHydrated] = useState(false);
+    
+    // Handle hydration to prevent UI mismatch between server and client
+    useEffect(() => {
+        setHydrated(true);
+    }, []);
     
     //context
     const handleClick = () => {
@@ -54,6 +60,11 @@ const NavbarContent = (props) => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, [prevScrollPos, visible, handleScroll]);
+
+    // Only apply shifter class after hydration to avoid mobile Chrome issue
+    const shifterClassName = `${styles.shifter} ${
+        navOpen === 'open' ? styles.low : ''
+    } ${!hydrated ? styles.preHydration : ''}`;
 
     return (
         <div>
@@ -96,11 +107,7 @@ const NavbarContent = (props) => {
                 </div>
             </button>
             <div className={styles.framebox}></div>
-            <div
-                className={`${styles.shifter} ${
-                    navOpen === 'open' ? styles.low : null
-                }`}
-            >
+            <div className={shifterClassName}>
                 {props.children}
             </div>
         </div>
