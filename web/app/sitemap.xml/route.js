@@ -1,4 +1,4 @@
-import { client } from '../../client'; // Assumes client.js is at next-blog/web/client.js
+import client from '../../client'; 
 
 // Ensure this environment variable is set in Vercel project settings: NEXT_PUBLIC_SITE_URL
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.venugopal.net';
