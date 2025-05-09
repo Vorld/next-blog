@@ -1,6 +1,6 @@
 .landing {
   color: #e0e0e0;
-  height: 100vh;
+  height: 100dvh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -37,7 +37,7 @@
   line-height: 150%;
   letter-spacing: 0.01em;
 
-  height: 100vh;
+  height: 100dvh;
   padding: 0% 30% 0% 30%; /* TODO: Decide if I want to keep this 30% padding*/
 }
 
@@ -194,25 +194,18 @@
 }
 
 @media only screen and (max-width: 767px) {
-  .landing, .para {
-    /* Use min-height instead of fixed height to prevent overflow issues */
-    min-height: 100vh;
-    height: auto;
-    /* Fix for mobile browsers with changing UI elements */
-    min-height: -webkit-fill-available;
+  .landing {
+    min-height: 100svh; /* Use smallest viewport height for initial stability */
+    height: 100dvh;     /* Adapt to dynamic viewport height */
+    box-sizing: border-box; /* Ensure padding/border don't add to height */
   }
-  
+
   .para {
     letter-spacing: 0.005em;
     padding: 0% 10% 0% 10%;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-  }
-  
-  /* Ensure first section doesn't appear taller on initial load */
-  .section1 {
-    margin-top: 0;
-    position: relative;
+    min-height: 100svh; /* Use smallest viewport height for initial stability */
+    height: 100dvh;     /* Adapt to dynamic viewport height */
+    box-sizing: border-box; /* Ensure padding/border don't add to height */
   }
   
   .socialIcons {
