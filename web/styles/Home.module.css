@@ -1,6 +1,6 @@
 .landing {
   color: #e0e0e0;
-  height: 100dvh;
+  height: 100lvh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -37,7 +37,7 @@
   line-height: 150%;
   letter-spacing: 0.01em;
 
-  height: 100dvh;
+  height: 100lvh;
   padding: 0% 20% 0% 20%; /* TODO: Decide if I want to keep this 30% padding*/
 }
 
