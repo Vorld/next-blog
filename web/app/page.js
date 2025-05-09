@@ -24,24 +24,37 @@ function urlFor(source) {
     return imageUrlBuilder(client).image(source);
 }
 
+// TODO: Random dynamic elements like bits that fly off near the cursor.
+// TODO: SEO
+// TODO: Search Feature for blog posts
+
 const HomePage = async () => {
     // Fetch author with image from Sanity
     const author = await client.fetch(groq`*[_type == "author"][0]{
         name,
-        image
+        image {
+            asset->{
+                _id,
+                url,
+                metadata {
+                    dimensions
+                }
+            }
+        }
     }`);
+
     return (
         <div>
             <div className={styles.landing}>
-                <Typewriter 
-                    messages={msgs} 
+                <Typewriter
+                    messages={msgs}
                     fontSize="4.5rem"
                     fontWeight="lighter"
                     cursorColor="#e0e0e0"
                     typeSpeed={200}
                 />
-                <Typewriter 
-                    messages={["Code Monkey.", "Laughs at his own jokes.", "Makes onions cry.", "Does not copy Minecraft.", "Judges book covers.", "Reinventor of the wheel.", "Avoids the plague.", "Lives for the plot.", "Do you like rhetorical questions?", "Goal Disoriented Person.", "Uses 'literally' figuratively.", "Has a favorite spoon.", "Yes, this is an infinite loop.", "Thinks coffee is soup.", "Serial Monotasker.","I can't go on. I'll go on."]} 
+                <Typewriter
+                    messages={["Code Monkey.", "Laughs at his own jokes.", "Makes onions cry.", "Does not copy Minecraft.", "Judges book covers.", "Reinventor of the wheel.", "Avoids the plague.", "Lives for the plot.", "Do you like rhetorical questions?", "Goal Disoriented Person.", "Uses 'literally' figuratively.", "Has a favorite spoon.", "Yes, this is an infinite loop.", "Thinks coffee is soup.", "Serial Monotasker.","I can't go on. I'll go on."]}
                     loop
                     startDelay={8000}
                     typeSpeed={150}
@@ -60,8 +73,7 @@ const HomePage = async () => {
                             <Image
                                 src={urlFor(author.image).fit('crop').url()}
                                 alt={author.name || 'Author profile photo'}
-                                width={400}
-                                height={500}
+                                fill
                                 className={styles.authorImage}
                                 priority
                             />
@@ -79,6 +91,9 @@ const HomePage = async () => {
                         After emerging in a little town called Kalaburagi (literal translation: Land of Rocks and Thorns) in Karnataka, India, I was promptly whisked to Singapore, where I spent the first fifteen years of my life. In 2019, I moved to Chennai, where I graduated high school before returning to Singapore for National Service.
                         </p>
                         <p>
+                        When I&apos;m not messing around on my computer, I&apos;m probably lost in a story—through a book, a movie, a game, or just a conversation with a friend. Occasionally, I dabble in <Link href="/blog" className={styles.emailLink}>writing</Link>, <Link href="/photos" className={styles.emailLink}>photography</Link>, and <Link href="https://www.youtube.com/@vu3905" className={styles.emailLink} target="_blank">producing music</Link>. 
+                        </p>
+                        <p>
                         Currently, I&apos;m pursuing Computer Science and liberal arts(ish) at the National University of Singapore while part of the NUS College programme (Class of &apos;28).
                         </p>
                     </div>
@@ -86,12 +101,12 @@ const HomePage = async () => {
             </div>
             <div className={`${styles.para} ${styles.section2}`}>
                 <h2 className={styles.header}>ABOUT THIS WEBSITE</h2>
-                <p>
-                    This website was built with <Link href='https://nextjs.org/' className={styles.emailLink}>Next.js</Link>, integrated with the <Link className={styles.emailLink} href="https://www.sanity.io/">Sanity</Link> headless content management system and hosted on <Link className={styles.emailLink} href="https://www.vercel.com/">Vercel</Link>. 
+                <p> 
+                    This website was built with <Link href='https://nextjs.org/' className={styles.emailLink} target="_blank">Next.js</Link>, integrated with the <Link className={styles.emailLink} href="https://www.sanity.io/" target="_blank">Sanity</Link> headless content management system and hosted on <Link className={styles.emailLink} href="https://www.vercel.com/" target="_blank">Vercel</Link>. 
                 </p>
-                <p>The navigation was inspired by the folks over at <Link href='https://www.hugeinc.com/' className={styles.emailLink}>Huge inc</Link>.</p>
+                <p>The navigation was inspired by the folks over at <Link href='https://www.hugeinc.com/' className={styles.emailLink} target="_blank">Huge inc</Link>.</p>
                 <p>
-                    Checkout the <Link href='https://www.github.com/vorld/next-blog' className={styles.emailLink}>Github repository</Link>. 
+                    Checkout the <Link href='https://www.github.com/vorld/next-blog' className={styles.emailLink} target="_blank">Github repository</Link>. 
                 </p>
             </div>
             <div className={`${styles.para} ${styles.section3}`}>

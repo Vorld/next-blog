@@ -39,7 +39,7 @@ const PhotoGallery = ({ images }) => {
                         >
                             <Image
                                 src={image.url}
-                                alt={image.alt || "Gallery image"}
+                                alt={image.caption || "Gallery image"}
                                 className={styles.image}
                                 width={image.dimensions.width}
                                 height={image.dimensions.height}

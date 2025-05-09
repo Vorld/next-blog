@@ -213,7 +213,7 @@ const Lightbox = ({ images, initialIndex, onClose }) => {
                     )}
                     <Image
                         src={currentImage.url}
-                        alt={currentImage.alt || "Lightbox image"}
+                        alt={currentImage.caption || "Lightbox image"}
                         width={originalWidth}
                         height={originalHeight}
                         style={{ 

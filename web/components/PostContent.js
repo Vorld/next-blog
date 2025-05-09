@@ -67,8 +67,7 @@ const ptComponents = {
     },
 };
 
-// This component renders the main content and needs to be a Client Component
-// because PortableText uses client components (Latex, PDFViewer).
+
 const PostContent = ({ post }) => {
     if (!post) {
         return null;
@@ -76,7 +75,7 @@ const PostContent = ({ post }) => {
 
     const {
         title = 'Missing title',
-        author = 'Missing author name',
+        authorName = 'Missing author name',
         categories,
         date,
         body = [],
@@ -86,7 +85,6 @@ const PostContent = ({ post }) => {
 
     return (
         <div>
-            {/* Header can be used directly */}
             <Header heading={'BLOG'} />
 
             <article className={styles.container}>
@@ -95,13 +93,12 @@ const PostContent = ({ post }) => {
                     {' Back to all'}
                 </Link>
                 <h1 className={styles.title}>{title}</h1>
-                <h5 className={styles.name}>By {author}</h5>
+                <h5 className={styles.name}>By {authorName}</h5>
                 <span className={styles.date}>
                     <FormattedDate date={date} />
                 </span>
 
                 <div className={styles.body}>
-                    {/* Use the renamed PortableText component */}
                     <ReactPortableText value={body} components={ptComponents} />
                 </div>
 
@@ -109,7 +106,7 @@ const PostContent = ({ post }) => {
                     {categories?.map((category) => (
                         <Link
                             key={category.title}
-                            href={`/blog/category/${category.slug.current}`}
+                            href={`/blog/category/${category.slug}`}
                         >
                             {category.title}
                         </Link>
