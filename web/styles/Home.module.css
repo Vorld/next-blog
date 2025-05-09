@@ -38,7 +38,7 @@
   letter-spacing: 0.01em;
 
   height: 100lvh;
-  padding: 0% 20% 0% 20%; /* TODO: Decide if I want to keep this 30% padding*/
+  padding: 0% 25% 0% 25%; /* TODO: Decide if I want to keep this 30% padding*/
 }
 
 .section1 {
@@ -200,16 +200,16 @@
 
 @media only screen and (max-width: 767px) {
   .landing {
-    min-height: 100svh; /* Use smallest viewport height for initial stability */
-    height: 100dvh;     /* Adapt to dynamic viewport height */
+    min-height: 100lvh; /* Use smallest viewport height for initial stability */
+    height: 100lvh;     /* Adapt to dynamic viewport height */
     box-sizing: border-box; /* Ensure padding/border don't add to height */
   }
 
   .para {
     letter-spacing: 0.005em;
     padding: 0% 10% 0% 10%;
-    min-height: 100svh; /* Use smallest viewport height for initial stability */
-    height: 100dvh;     /* Adapt to dynamic viewport height */
+    min-height: 100lvh; /* Use smallest viewport height for initial stability */
+    height: 100lvh;     /* Adapt to dynamic viewport height */
     box-sizing: border-box; /* Ensure padding/border don't add to height */
   }
   
