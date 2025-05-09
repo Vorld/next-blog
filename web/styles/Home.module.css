@@ -38,7 +38,7 @@
   letter-spacing: 0.01em;
 
   height: 100lvh;
-  padding: 0% 25% 0% 25%; /* TODO: Decide if I want to keep this 30% padding*/
+  padding: 0% 25% 0% 25%; 
 }
 
 .section1 {
@@ -170,7 +170,7 @@
 .authorProfile {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center; /* Vertically center items in the row */
   gap: 2rem;
   margin-bottom: 2rem;
 }
@@ -196,20 +196,26 @@
 .authorText {
   flex: 1;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* This will center the text block's content vertically */
+  max-height: 80lvh;
+  overflow-y: auto;
+  justify-content: flex-start;
 }
 
 @media only screen and (max-width: 767px) {
   .landing {
-    min-height: 100lvh; /* Use smallest viewport height for initial stability */
-    height: 100lvh;     /* Adapt to dynamic viewport height */
+    min-height: 100lvh; 
+    height: 100lvh;    
     box-sizing: border-box; /* Ensure padding/border don't add to height */
   }
 
   .para {
     letter-spacing: 0.005em;
     padding: 0% 10% 0% 10%;
-    min-height: 100lvh; /* Use smallest viewport height for initial stability */
-    height: 100lvh;     /* Adapt to dynamic viewport height */
+    min-height: 100lvh; 
+    height: 100lvh;     
     box-sizing: border-box; /* Ensure padding/border don't add to height */
   }
   
@@ -239,5 +245,8 @@
   
   .authorText {
     width: 100%;
+    /* text-align and align-items removed for mobile, rely on parent's align-items:center */
+    /* and its own justify-content: center if needed, though for column it might not be the primary effect */
   }
 }
+

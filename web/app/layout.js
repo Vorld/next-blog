@@ -71,8 +71,8 @@ export default function RootLayout({ children }) {
     '@type': 'Organization',
     name: 'Kulkarni Venugopal',
     url: siteUrl,
-    logo: `${siteUrl}/myPhoto.jpg`, // Replace with your actual logo path
-    sameAs: [ // Optional: Add social media links
+    logo: `${siteUrl}/myPhoto.jpg`,
+    sameAs: [
       'https://twitter.com/_Vorld',
       'https://www.linkedin.com/in/KulkarniVenugopal/',
       'https://www.instagram.com/vorld_/',
