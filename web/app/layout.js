@@ -59,6 +59,10 @@ export const metadata = {
   // },
 };
 
+export const viewport = {
+  interactiveWidget: "resizes-content"
+}
+
 export default function RootLayout({ children }) {
   const siteUrl = 'https://www.venugopal.net'; // Define for use in JSON-LD
 
@@ -104,6 +108,7 @@ export default function RootLayout({ children }) {
           rel='stylesheet'
           precedence="default"
         />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content"></meta>
       </head>
       <body>
         <Navbar>
