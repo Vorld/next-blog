@@ -83,7 +83,7 @@ const HomePage = async () => {
                         After emerging in a little town called Kalaburagi (literal translation: Land of Rocks and Thorns) in Karnataka, India, I was promptly whisked to Singapore, where I spent the first fifteen years of my life. In 2019, I moved to Chennai, where I graduated high school before returning to Singapore for National Service.
                         </p>
                         <p>
-                        When I'm not messing around on my computer, I'm probably lost in a story—through a book, a movie, a game, or just a conversation with a friend. Occasionally, I dabble in <Link href="/blog" className={styles.emailLink}>writing</Link>, <Link href="/photos" className={styles.emailLink}>photography</Link>, and <Link href="https://www.youtube.com/@vu3905" className={styles.emailLink} target="_blank">producing music</Link>. 
+                        When I&apos;m not messing around on my computer, I&apos;m probably lost in a story—through a book, a movie, a game, or just a conversation with a friend. Occasionally, I dabble in <Link href="/blog" className={styles.emailLink}>writing</Link>, <Link href="/photos" className={styles.emailLink}>photography</Link>, and <Link href="https://www.youtube.com/@vu3905" className={styles.emailLink} target="_blank">producing music</Link>. 
                         </p>
                         <p>
                         Currently, I&apos;m pursuing Computer Science and liberal arts(ish) at the National University of Singapore while part of the NUS College programme (Class of &apos;28).
