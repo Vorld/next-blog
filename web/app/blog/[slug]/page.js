@@ -49,7 +49,7 @@ export async function generateStaticParams() {
 
 // Generate metadata for the page
 export async function generateMetadata({ params }) {
-    const { slug } = params; 
+    const { slug } = await params; 
 
     const post = await getPost(slug);
     if (!post) {
@@ -84,7 +84,7 @@ export async function generateMetadata({ params }) {
 
 // Page component (Server Component)
 const PostPage = async ({ params }) => {
-    const { slug } = params;
+    const { slug } = await params;
     const post = await getPost(slug);
 
     if (!post) {

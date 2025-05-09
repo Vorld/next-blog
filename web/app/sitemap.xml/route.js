@@ -1,6 +1,6 @@
 import client from '../../client'; 
 
-// Ensure this environment variable is set in Vercel project settings: NEXT_PUBLIC_SITE_URL
+
 const SITE_URL = 'https://www.venugopal.net';
 
 export const revalidate = 0; // Ensures the sitemap is always fresh

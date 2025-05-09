@@ -38,7 +38,7 @@
   letter-spacing: 0.01em;
 
   height: 100dvh;
-  padding: 0% 30% 0% 30%; /* TODO: Decide if I want to keep this 30% padding*/
+  padding: 0% 20% 0% 20%; /* TODO: Decide if I want to keep this 30% padding*/
 }
 
 .section1 {
@@ -180,12 +180,17 @@
   /* Ensures the image stays rectangular and doesn't shrink */
   display: flex;
   align-items: flex-start;
+  position: relative; /* Added for next/image with fill */
+  width: 20vw; /* Constrain the wrapper's width */
+  height: 70vh; /* Constrain the wrapper's height */
 }
 
 .authorImage {
-  object-fit: cover;
+  object-fit: cover; /* Reverted to cover for fill behavior */
   box-shadow: 0 2px 12px rgba(0,0,0,0.18);
   background: #222;
+  /* With fill, the image takes the dimensions of the wrapper.
+     Explicit width/height on .authorImage itself is not needed. */
 }
 
 .authorText {

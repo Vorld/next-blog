@@ -32,20 +32,29 @@ const HomePage = async () => {
     // Fetch author with image from Sanity
     const author = await client.fetch(groq`*[_type == "author"][0]{
         name,
-        image
+        image {
+            asset->{
+                _id,
+                url,
+                metadata {
+                    dimensions
+                }
+            }
+        }
     }`);
+
     return (
         <div>
             <div className={styles.landing}>
-                <Typewriter 
-                    messages={msgs} 
+                <Typewriter
+                    messages={msgs}
                     fontSize="4.5rem"
                     fontWeight="lighter"
                     cursorColor="#e0e0e0"
                     typeSpeed={200}
                 />
-                <Typewriter 
-                    messages={["Code Monkey.", "Laughs at his own jokes.", "Makes onions cry.", "Does not copy Minecraft.", "Judges book covers.", "Reinventor of the wheel.", "Avoids the plague.", "Lives for the plot.", "Do you like rhetorical questions?", "Goal Disoriented Person.", "Uses 'literally' figuratively.", "Has a favorite spoon.", "Yes, this is an infinite loop.", "Thinks coffee is soup.", "Serial Monotasker.","I can't go on. I'll go on."]} 
+                <Typewriter
+                    messages={["Code Monkey.", "Laughs at his own jokes.", "Makes onions cry.", "Does not copy Minecraft.", "Judges book covers.", "Reinventor of the wheel.", "Avoids the plague.", "Lives for the plot.", "Do you like rhetorical questions?", "Goal Disoriented Person.", "Uses 'literally' figuratively.", "Has a favorite spoon.", "Yes, this is an infinite loop.", "Thinks coffee is soup.", "Serial Monotasker.","I can't go on. I'll go on."]}
                     loop
                     startDelay={8000}
                     typeSpeed={150}
@@ -64,8 +73,7 @@ const HomePage = async () => {
                             <Image
                                 src={urlFor(author.image).fit('crop').url()}
                                 alt={author.name || 'Author profile photo'}
-                                width={400}
-                                height={500}
+                                fill
                                 className={styles.authorImage}
                                 priority
                             />
@@ -93,7 +101,7 @@ const HomePage = async () => {
             </div>
             <div className={`${styles.para} ${styles.section2}`}>
                 <h2 className={styles.header}>ABOUT THIS WEBSITE</h2>
-                <p>
+                <p> 
                     This website was built with <Link href='https://nextjs.org/' className={styles.emailLink} target="_blank">Next.js</Link>, integrated with the <Link className={styles.emailLink} href="https://www.sanity.io/" target="_blank">Sanity</Link> headless content management system and hosted on <Link className={styles.emailLink} href="https://www.vercel.com/" target="_blank">Vercel</Link>. 
                 </p>
                 <p>The navigation was inspired by the folks over at <Link href='https://www.hugeinc.com/' className={styles.emailLink} target="_blank">Huge inc</Link>.</p>
