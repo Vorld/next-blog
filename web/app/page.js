@@ -83,6 +83,9 @@ const HomePage = async () => {
                         After emerging in a little town called Kalaburagi (literal translation: Land of Rocks and Thorns) in Karnataka, India, I was promptly whisked to Singapore, where I spent the first fifteen years of my life. In 2019, I moved to Chennai, where I graduated high school before returning to Singapore for National Service.
                         </p>
                         <p>
+                        When I'm not messing around on my computer, I'm probably lost in a story—through a book, a movie, a game, or just a conversation with a friend. Occasionally, I dabble in <Link href="/blog" className={styles.emailLink}>writing</Link>, <Link href="/photos" className={styles.emailLink}>photography</Link>, and <Link href="https://www.youtube.com/@vu3905" className={styles.emailLink} target="_blank">producing music</Link>. 
+                        </p>
+                        <p>
                         Currently, I&apos;m pursuing Computer Science and liberal arts(ish) at the National University of Singapore while part of the NUS College programme (Class of &apos;28).
                         </p>
                     </div>
@@ -91,11 +94,11 @@ const HomePage = async () => {
             <div className={`${styles.para} ${styles.section2}`}>
                 <h2 className={styles.header}>ABOUT THIS WEBSITE</h2>
                 <p>
-                    This website was built with <Link href='https://nextjs.org/' className={styles.emailLink}>Next.js</Link>, integrated with the <Link className={styles.emailLink} href="https://www.sanity.io/">Sanity</Link> headless content management system and hosted on <Link className={styles.emailLink} href="https://www.vercel.com/">Vercel</Link>. 
+                    This website was built with <Link href='https://nextjs.org/' className={styles.emailLink} target="_blank">Next.js</Link>, integrated with the <Link className={styles.emailLink} href="https://www.sanity.io/" target="_blank">Sanity</Link> headless content management system and hosted on <Link className={styles.emailLink} href="https://www.vercel.com/" target="_blank">Vercel</Link>. 
                 </p>
-                <p>The navigation was inspired by the folks over at <Link href='https://www.hugeinc.com/' className={styles.emailLink}>Huge inc</Link>.</p>
+                <p>The navigation was inspired by the folks over at <Link href='https://www.hugeinc.com/' className={styles.emailLink} target="_blank">Huge inc</Link>.</p>
                 <p>
-                    Checkout the <Link href='https://www.github.com/vorld/next-blog' className={styles.emailLink}>Github repository</Link>. 
+                    Checkout the <Link href='https://www.github.com/vorld/next-blog' className={styles.emailLink} target="_blank">Github repository</Link>. 
                 </p>
             </div>
             <div className={`${styles.para} ${styles.section3}`}>

@@ -11,14 +11,22 @@ async function getAllPostSlugs() {
   return posts;
 }
 
+async function getAllCategorySlugs() {
+  // Fetches slugs and last updated dates for all categories
+  const query = `*[_type == "category" && defined(slug.current)]{ "slug": slug.current, _updatedAt }`;
+  const categories = await client.fetch(query);
+  return categories;
+}
+
 export async function GET() {
   const allPosts = await getAllPostSlugs();
+  const allCategories = await getAllCategorySlugs();
 
   const staticPages = [
     { path: '', lastModified: new Date().toISOString(), priority: 1.0 }, // Homepage
     { path: 'blog', lastModified: new Date().toISOString(), priority: 0.8 },
-    { path: 'photos', lastModified: new Date().toISOString(), priority: 0.7 },
-    { path: 'music', lastModified: new Date().toISOString(), priority: 0.7 },
+    { path: 'photos', lastModified: '2024-01-01T00:00:00.000Z', priority: 0.7 }, // Updated lastModified
+    { path: 'music', lastModified: '2024-01-02T00:00:00.000Z', priority: 0.7 }, // Updated lastModified
     // Add any other static pages here if needed in the future
     // e.g., { path: 'about', lastModified: new Date().toISOString(), priority: 0.5 },
   ];
@@ -50,6 +58,17 @@ export async function GET() {
               <loc>${SITE_URL}/blog/${post.slug}</loc>
               <lastmod>${new Date(post._updatedAt).toISOString().split('T')[0]}</lastmod>
               <priority>0.9</priority>
+            </url>
+          `;
+        })
+        .join('')}
+      ${allCategories
+        .map((category) => {
+          return `
+            <url>
+              <loc>${SITE_URL}/blog/category/${category.slug}</loc>
+              <lastmod>${new Date(category._updatedAt).toISOString().split('T')[0]}</lastmod>
+              <priority>0.7</priority>
             </url>
           `;
         })
