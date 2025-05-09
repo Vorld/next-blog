@@ -24,6 +24,10 @@ function urlFor(source) {
     return imageUrlBuilder(client).image(source);
 }
 
+// TODO: Random dynamic elements like bits that fly off near the cursor.
+// TODO: SEO
+// TODO: Search Feature for blog posts
+
 const HomePage = async () => {
     // Fetch author with image from Sanity
     const author = await client.fetch(groq`*[_type == "author"][0]{
