@@ -75,7 +75,7 @@ const PostContent = ({ post }) => {
 
     const {
         title = 'Missing title',
-        author = 'Missing author name',
+        authorName = 'Missing author name',
         categories,
         date,
         body = [],
@@ -93,7 +93,7 @@ const PostContent = ({ post }) => {
                     {' Back to all'}
                 </Link>
                 <h1 className={styles.title}>{title}</h1>
-                <h5 className={styles.name}>By {author}</h5>
+                <h5 className={styles.name}>By {authorName}</h5>
                 <span className={styles.date}>
                     <FormattedDate date={date} />
                 </span>

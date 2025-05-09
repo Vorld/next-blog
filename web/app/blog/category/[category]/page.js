@@ -145,7 +145,7 @@ const BlogCategoryPage = async ({ params }) => {
 
                 <div className={styles.top}>
                     <h3 className={styles.filter}>
-                        Filtering for "{pageTitle}"
+                        Filtering for &quot;{pageTitle}&quot;
                     </h3>
                     <Link href='/blog' className={styles.return}>
                         <FontAwesomeIcon icon={faAngleLeft} size="s"/>
