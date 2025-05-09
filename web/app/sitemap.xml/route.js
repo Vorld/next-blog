@@ -1,11 +1,11 @@
 import client from '../../client'; 
 
 // Ensure this environment variable is set in Vercel project settings: NEXT_PUBLIC_SITE_URL
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.venugopal.net';
+const SITE_URL = 'https://www.venugopal.net';
 
+export const revalidate = 0; // Ensures the sitemap is always fresh
 async function getAllPostSlugs() {
   // Fetches slugs and last updated dates for all posts
-  // Ensure your Sanity schema for 'post' has a 'slug' field of type 'slug' and includes '_updatedAt'
   const query = `*[_type == "post" && defined(slug.current)]{ "slug": slug.current, _updatedAt }`;
   const posts = await client.fetch(query);
   return posts;
