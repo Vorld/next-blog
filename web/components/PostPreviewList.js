@@ -38,7 +38,9 @@ const PostPreviewList = ({ posts }) => {
                         onClick={(e) => handleNavigate(slug.current, e)}
                         style={{ cursor: 'pointer' }} 
                     >
-                        <h1 className={styles.title}>{title}</h1>
+                        <Link href={`/blog/${slug.current}`} onClick={(e) => e.stopPropagation()} className={styles.titleLink}>
+                            <h1 className={styles.title}>{title}</h1>
+                        </Link>
                         <div className={styles.subtitle}>{subtitle}</div>
                         <div className={styles.info}>
                             <span className={styles.date}>
