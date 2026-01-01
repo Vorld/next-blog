@@ -62,7 +62,30 @@ const ptComponents = {
                 id +
                 '.' +
                 extension;
-            return <PDFViewer url={url} id={id} />;
+
+            return (
+                <>
+                    {/* PDF URL link for SEO - hidden from view but in DOM */}
+                    <a
+                        href={url}
+                        aria-label="Download PDF document"
+                        style={{
+                            position: 'absolute',
+                            width: '1px',
+                            height: '1px',
+                            padding: 0,
+                            margin: '-1px',
+                            overflow: 'hidden',
+                            clip: 'rect(0,0,0,0)',
+                            whiteSpace: 'nowrap',
+                            border: 0
+                        }}
+                    >
+                        View PDF Document
+                    </a>
+                    <PDFViewer url={url} id={id} />
+                </>
+            );
         },
     },
 };
