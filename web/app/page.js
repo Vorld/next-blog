@@ -25,8 +25,8 @@ function urlFor(source) {
 }
 
 // TODO: Random dynamic elements like bits that fly off near the cursor.
-// TODO: SEO
 // TODO: Search Feature for blog posts
+// TODO: Playground subdomain with links to my projects
 
 const HomePage = async () => {
     // Fetch author with image from Sanity

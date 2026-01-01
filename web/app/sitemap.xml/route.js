@@ -18,9 +18,28 @@ async function getAllCategorySlugs() {
   return categories;
 }
 
+async function getAllPdfAssets() {
+  // Fetches all PDF file assets from posts
+  const query = `*[_type == "post"]{
+    "pdfs": body[_type == "file"]{
+      "ref": asset._ref,
+      "postSlug": ^.slug.current,
+      "postUpdatedAt": ^._updatedAt
+    }
+  }`;
+  const posts = await client.fetch(query);
+
+  // Flatten and filter to get all PDFs
+  const pdfs = posts.flatMap(post => post.pdfs || [])
+                    .filter(pdf => pdf.ref);
+
+  return pdfs;
+}
+
 export async function GET() {
   const allPosts = await getAllPostSlugs();
   const allCategories = await getAllCategorySlugs();
+  const allPdfs = await getAllPdfAssets();
 
   const staticPages = [
     { path: '', lastModified: new Date().toISOString(), priority: 1.0 }, // Homepage
@@ -69,6 +88,19 @@ export async function GET() {
               <loc>${SITE_URL}/blog/category/${category.slug}</loc>
               <lastmod>${new Date(category._updatedAt).toISOString().split('T')[0]}</lastmod>
               <priority>0.7</priority>
+            </url>
+          `;
+        })
+        .join('')}
+      ${allPdfs
+        .map((pdf) => {
+          const [_file, id, extension] = pdf.ref.split('-');
+          const pdfUrl = `https://cdn.sanity.io/files/qjy3hvt5/production/${id}.${extension}`;
+          return `
+            <url>
+              <loc>${pdfUrl}</loc>
+              <lastmod>${new Date(pdf.postUpdatedAt).toISOString().split('T')[0]}</lastmod>
+              <priority>0.6</priority>
             </url>
           `;
         })
