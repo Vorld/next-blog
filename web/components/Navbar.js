@@ -38,6 +38,8 @@ const NavbarContent = (props) => {
     // hide button on scroll (only on home page)
     const [prevScrollPos, setPrevScrollPos] = useState(0);
     const [visible, setVisible] = useState(true);
+    const [atTop, setAtTop] = useState(true);
+    const [showMenuLabel, setShowMenuLabel] = useState(false);
 
     const handleScroll = debounce(() => {
         const currentScrollPos = window.pageYOffset;
@@ -48,18 +50,43 @@ const NavbarContent = (props) => {
                 currentScrollPos < 10
         );
 
+        setAtTop(currentScrollPos < 10);
+
         setPrevScrollPos(currentScrollPos);
     }, 50);
 
     useEffect(() => {
-        // Only add scroll listener on home page
         if (isHomePage) {
+            // On home page: add debounced scroll listener for button hide/show
             window.addEventListener('scroll', handleScroll);
             return () => {
                 window.removeEventListener('scroll', handleScroll);
             };
+        } else {
+            // On other pages: just track if at top for menu label
+            const handleScrollSimple = () => {
+                setAtTop(window.pageYOffset < 10);
+            };
+            window.addEventListener('scroll', handleScrollSimple);
+            return () => {
+                window.removeEventListener('scroll', handleScrollSimple);
+            };
         }
     }, [prevScrollPos, visible, handleScroll, isHomePage]);
+
+    // Handle menu label animation with delay when at top
+    useEffect(() => {
+        if (atTop) {
+            // Wait 2.5s before showing menu label
+            const timer = setTimeout(() => {
+                setShowMenuLabel(true);
+            }, 2500);
+            return () => clearTimeout(timer);
+        } else {
+            // Immediately hide when not at top
+            setShowMenuLabel(false);
+        }
+    }, [atTop]);
 
     return (
         <div>
@@ -101,6 +128,15 @@ const NavbarContent = (props) => {
                     <span></span>
                 </div>
             </button>
+            <div
+                className={`${styles['menu-label']} ${
+                    showMenuLabel && navOpen === 'close'
+                        ? styles['menu-label-show']
+                        : styles['menu-label-hide']
+                }`}
+            >
+                MENU
+            </div>
             <div className={styles.framebox}></div>
             <div
                 className={`${styles.shifter} ${
