@@ -4,6 +4,7 @@ import styles from '../styles/components/Navbar.module.css';
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { NavProvider, useNav } from '../context/NavContext';
 
 //debouncing function for scroll
@@ -26,13 +27,15 @@ const debounce = (func, wait, immediate) => {
 // Internal component that uses the nav context
 const NavbarContent = (props) => {
     const { navOpen, setNavOpen } = useNav();
-    
+    const pathname = usePathname();
+    const isHomePage = pathname === '/';
+
     //context
     const handleClick = () => {
         setNavOpen(navOpen === 'close' ? 'open' : 'close');
     };
 
-    // hide button on scroll
+    // hide button on scroll (only on home page)
     const [prevScrollPos, setPrevScrollPos] = useState(0);
     const [visible, setVisible] = useState(true);
 
@@ -49,11 +52,14 @@ const NavbarContent = (props) => {
     }, 50);
 
     useEffect(() => {
-        window.addEventListener('scroll', handleScroll);
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, [prevScrollPos, visible, handleScroll]);
+        // Only add scroll listener on home page
+        if (isHomePage) {
+            window.addEventListener('scroll', handleScroll);
+            return () => {
+                window.removeEventListener('scroll', handleScroll);
+            };
+        }
+    }, [prevScrollPos, visible, handleScroll, isHomePage]);
 
     return (
         <div>
@@ -84,7 +90,7 @@ const NavbarContent = (props) => {
             <button
                 onClick={() => handleClick()}
                 className={`${styles['menu-button']}  ${
-                    !visible && navOpen === 'close'
+                    isHomePage && !visible && navOpen === 'close'
                         ? styles['menu-button-hide']
                         : null
                 }`}
